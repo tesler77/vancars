@@ -1,0 +1,6 @@
+﻿mt-5 {
+margin-top:5px;
+}
+.row div[class*="col-"], .row aside[class*="col-"] {
+    margin-top: 0px;
+}

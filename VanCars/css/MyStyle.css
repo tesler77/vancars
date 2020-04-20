@@ -1,0 +1,55 @@
+﻿.ui-widget-header {
+    background: #E60000;
+    height: 4px;
+}
+
+span.ui-slider-handle.ui-state-default.ui-corner-all {
+    background-color: #14181c;
+    border: solid 3px #14181c;
+    border-radius: 0;
+    width: 12px;
+}
+
+span#rating_range_label.slider-label {
+    float: left;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border-color: transparent;
+    border: none;
+    font-size: 15px;
+    font-weight: 700;
+    color: #7f7f7f;
+    width: 120px;
+    line-height: 33px;
+    margin-top: 12px;
+}
+
+span#runtime_range_label.slider-label {
+    float: left;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border-color: transparent;
+    border: none;
+    font-size: 15px;
+    font-weight: 700;
+    color: #7f7f7f;
+    width: 120px;
+    line-height: 33px;
+    margin-top: 12px;
+}
+
+.thumbnail .caption {
+    padding: 0px;
+    border-radius: 0;
+}
+
+.btn {
+    border-radius: 0;
+}
+.checkbox {
+    position: unset;
+}
