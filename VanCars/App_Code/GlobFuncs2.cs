@@ -99,6 +99,27 @@ namespace Glob
             dt = db.ExecuteReader(sql);
             return JsonConvert.SerializeObject(dt);
         }
+        public static List<Item> addMoreLine(List<Item> ddlList,string name)
+        {
+            ddlList.Add(new Item(9999," להוספת" +name));
+            return ddlList;
+        }
+
+        public static string getAllOrders()
+        {
+            DataBase db = new DataBase();
+            string sql = "select RentId,CustomId,DateOrder,PickupDate,ReturnDate,branchs.Address+' '+citys.CityName as PickupBranch,companys .CompanyName from OrderTable inner join CompanysTable as companys on OrderTable.CompanyId = companys.CompanyId inner join BranchTable as branchs on OrderTable.PickupBranch = branchs.BranchId inner join CityTable as citys on branchs.CityId = citys.CityId order by RentId desc";
+            DataTable dt = db.ExecuteReader(sql);
+            return JsonConvert.SerializeObject(dt);
+        }
+
+        public static string getAllCustomers()
+        {
+            DataBase db = new DataBase();
+            string sql = "select CustomId,FullName, Address + ' '+ citys.CityName as Address,Email,Phone,numberIncorrects from CustomersTable inner join CityTable as citys on CustomersTable.City = citys.CityId";
+            DataTable dt = db.ExecuteReader(sql);
+            return JsonConvert.SerializeObject(dt);
+        }
         
     }
 }

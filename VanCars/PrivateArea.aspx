@@ -574,11 +574,10 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
-
                 <div class="tab-pane fade" id="Requests">
 
 
-                    <div class="container">
+                    <div class="container col-md-11">
                         <h3 class=" text-center">פניות לתמיכה ושרות לקוחות</h3>
                         <div class="messaging">
                             <div class="inbox_msg">
@@ -606,8 +605,11 @@
 
                         </div>
                     </div>
+                    <div class="col-md-1"></div>
                 </div>
             </div>
+                <div class="col-md-1"></div>
+
             <asp:Literal ID="ltlNo" runat="server"></asp:Literal>
             <script>
                 let ord = "";

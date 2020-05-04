@@ -63,3 +63,6 @@ C:\Users\pa850\Desktop\project\VanCars\VanCars\VanCars\bin\System.Web.Http.WebHo
 C:\Users\pa850\Desktop\project\VanCars\VanCars\VanCars\bin\System.Net.Http.Formatting.xml
 C:\Users\pa850\Desktop\project\VanCars\VanCars\VanCars\bin\System.Web.Http.xml
 C:\Users\pa850\Desktop\project\VanCars\VanCars\VanCars\bin\System.Web.Http.WebHost.xml
+C:\Users\pa850\Desktop\project\VanCars\VanCars\VanCars\bin\System.Web.Cors.dll
+C:\Users\pa850\Desktop\project\VanCars\VanCars\VanCars\bin\System.Web.Http.Cors.dll
+C:\Users\pa850\Desktop\project\VanCars\VanCars\VanCars\bin\System.Web.Http.Cors.xml

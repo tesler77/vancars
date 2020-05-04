@@ -30,6 +30,21 @@ namespace Glob
             }
             return DDllist;
         }
+
+        public static List<Item> getDDlWithCondition(string TableName, string id, string name,string condField,int condValue)
+        {
+            List<Item> DDllist = new List<Item>();
+            string sql = "select " + id + "," + name + " from " + TableName +" where "+condField +" = "+ condValue;
+            DataBase db = new DataBase();
+            DataTable dt = db.ExecuteReader(sql);
+            DDllist.Add(new Item(-1, "נא בחר ערך מתוך הרשימה"));
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                DDllist.Add(new Item((int)dt.Rows[i][id], (string)dt.Rows[i][name]));
+            }
+            return DDllist;
+        }
+
         public static Boolean IsExist(string Email) {
             DataBase db = new DataBase();
             string sql = "select Email from CustomersTable where Email = '" + Email + "'";
