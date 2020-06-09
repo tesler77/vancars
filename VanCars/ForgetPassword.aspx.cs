@@ -68,13 +68,12 @@ namespace VanCars
             }
             else
             {
-                bool b = GlobFuncs.UpdateDB("CustomersTable", "Password", pass.Text.ToString(), "Email", TxtForget.Text.ToString());
+                bool b = GlobFuncs.UpdateDB("CustomersTable", "Password", GlobFuncs.Hash( pass.Text.ToString()), "Email", TxtForget.Text.ToString());
                 if(b == true)
                 {
                     person per = new person();
                     Session["Person"] = per;
-                    Response.Redirect("index.aspx");
-                    per = (person)Session["Person"];
+                    Response.Redirect("PrivatArea.aspx");
                 }
                 else
                 {

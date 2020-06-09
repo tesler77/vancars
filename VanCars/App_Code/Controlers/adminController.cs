@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Newtonsoft.Json;
 using System.Web.Http.Cors;
+using Glob;
 
 namespace VanCars.App_Code.Controlers
 {
@@ -22,9 +23,10 @@ namespace VanCars.App_Code.Controlers
         }
 
         // GET: api/admin/5
+        [EnableCors(origins: "*", headers: "*", methods: "*", exposedHeaders: "X-My-Header")]
         public string Get(int id)
         {
-            return "";
+            return GlobFuncs.getCountOrders(id);
         }
 
         // POST: api/admin

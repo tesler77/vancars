@@ -14,6 +14,16 @@ namespace VanCars.App_Code
         public int customersMessage { get; set; }
         public string messageText { get; set; }
 
+        public chatMessage(int customerId, int orderId, int customersMessage,string messageText)
+        {
+            this.customerId = customerId;
+            this.orderId = orderId;
+            this.customersMessage = customersMessage;
+            this.messageText = messageText;
+        }
+
+        public chatMessage() { }
+
         public int addMessage()
         {
             DataBase db = new DataBase();

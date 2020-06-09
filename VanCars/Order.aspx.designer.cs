@@ -13,6 +13,15 @@ namespace VanCars {
     public partial class Order {
         
         /// <summary>
+        /// rptExt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptExt;
+        
+        /// <summary>
         /// TxtOrdName control.
         /// </summary>
         /// <remarks>
@@ -119,6 +128,42 @@ namespace VanCars {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnOrder;
+        
+        /// <summary>
+        /// hdnCard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnCard;
+        
+        /// <summary>
+        /// ltlAlert control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltlAlert;
+        
+        /// <summary>
+        /// ccc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField ccc;
+        
+        /// <summary>
+        /// hdnSelectedExt control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSelectedExt;
         
         /// <summary>
         /// LtlMsg1 control.

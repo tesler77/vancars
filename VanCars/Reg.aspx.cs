@@ -17,17 +17,19 @@ namespace WebApplication2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack) {
+            if (!IsPostBack)
+            {
                 GetCityList();
                 GetLicenseCode();
-                
+
             }
         }
-        private void GetCityList() {
+        private void GetCityList()
+        {
             TxtCity.DataSource = GlobFuncs.GetDDL("CityTable", "CityId", "CityName");
             TxtCity.DataTextField = "name";
             TxtCity.DataValueField = "id";
-            TxtCity.DataBind();            
+            TxtCity.DataBind();
 
         }
         private void GetLicenseCode()
@@ -42,76 +44,78 @@ namespace WebApplication2
         {
             if (TxtCity.SelectedValue == "-1")
             {
-                LtlMsg.Text = "<script> alert('נא בחר עיר')</script>";
                 TxtCity.Focus();
+                showErrorMwssage(4);
             }
             else if (DdlLicensCode.SelectedValue == "-1")
             {
-                LtlMsg.Text = "<script> alert('נא בחר דרגת רישיון')</script>";
                 DdlLicensCode.Focus();
+                showErrorMwssage(5);
             }
-            else {           
-                if(GlobFuncs.IsExist(TxtEmail.Text.ToString()) == true)
+            else
+            {
+                if (GlobFuncs.IsExist(TxtEmail.Text.ToString()) == true)
                 {
-                    LtlMsg.Text = "<script> alert('כבר קיים משתמש עם אותו כתובת אימייל')</script>";
                     TxtEmail.Focus();
+                    showErrorMwssage(6);
                 }
-                else if(checkbox1.Checked != true)
+                else if (checkbox1.Checked != true)
                 {
-                    LtlMsg.Text = "<script> alert('נא אשר את התקנון')</script>" ;
-                } 
-                else if(TxtName.Text.Length == 0) {
-                    LtlMsg.Text = "<script> alert('נא הזן שם')</script>";
+                    showErrorMwssage(7);
+                }
+                else if (TxtName.Text.Length == 0)
+                {
                     TxtName.Focus();
+                    showErrorMwssage(8);
                 }
                 else if (TxtAddress.Text.Length == 0)
                 {
-                    LtlMsg.Text = "<script> alert('נא הזן כתובת')</script>";
                     TxtAddress.Focus();
+                    showErrorMwssage(9);
                 }
                 else if (TxtId.Text.Length == 0)
                 {
-                    LtlMsg.Text = "<script> alert('נא הזן מספר זהות')</script>";
                     TxtId.Focus();
+                    showErrorMwssage(10);
                 }
                 else if (TxtDateOfBirth.Text.Length == 0)
                 {
-                    LtlMsg.Text = "<script> alert('נא הזן תאריך לידה')</script>";
                     TxtDateOfBirth.Focus();
+                    showErrorMwssage(11);
                 }
                 else if (TxtLicenseNumber.Text.Length == 0)
                 {
-                    LtlMsg.Text = "<script> alert('נא הזן מספר רישיון')</script>";
                     TxtLicenseNumber.Focus();
+                    showErrorMwssage(12);
                 }
                 else if (TxtDateOfIssuanceLicense.Text.Length == 0)
                 {
-                    LtlMsg.Text = "<script> alert('נא הזן תאירך הנפקת רישיון')</script>";
                     TxtDateOfIssuanceLicense.Focus();
+                    showErrorMwssage(13);
                 }
                 else if (TxtEmail.Text.Length == 0)
                 {
-                    TxtEmail.Text = "<script> alert('נא הזן אימייל')</script>";
                     TxtDateOfBirth.Focus();
+                    showErrorMwssage(14);
                 }
                 else if (TxtPass.Text.Length == 0)
                 {
-                    LtlMsg.Text = "<script> alert('נא הזן סיסמה')</script>";
                     TxtPass.Focus();
+                    showErrorMwssage(15);
                 }
                 else if (TxtPhone.Text.Length == 0)
                 {
-                    LtlMsg.Text = "<script> alert('נא הזן טלפון')</script>";
                     TxtPhone.Focus();
+                    showErrorMwssage(16);
                 }
-                else {
+                else
+                {
                     string pass = GlobFuncs.Hash(TxtPass.Text.ToString());
-                    Users Us = new Users(-1, TxtName.Text.ToString(), TxtAddress.Text.ToString(), int.Parse(TxtCity.Text.ToString()), TxtId.Text.ToString(), DateTime.Parse(TxtDateOfBirth.Text), TxtLicenseNumber.Text.ToString(), int.Parse(DdlLicensCode.Text.ToString()), DateTime.Parse(TxtDateOfIssuanceLicense.Text), TxtEmail.Text.ToString(),pass, TxtPhone.Text.ToString());
+                    Users Us = new Users(-1, TxtName.Text.ToString(), TxtAddress.Text.ToString(), int.Parse(TxtCity.Text.ToString()), TxtId.Text.ToString(), DateTime.Parse(TxtDateOfBirth.Text), TxtLicenseNumber.Text.ToString(), int.Parse(DdlLicensCode.Text.ToString()), DateTime.Parse(TxtDateOfIssuanceLicense.Text), TxtEmail.Text.ToString(), pass, TxtPhone.Text.ToString());
                     person per = new person();
                     per = Us.RegUser();
-                    LtlMsg.Text = "המשתמש נרשם בהצלחה";
-                    Session["Person"] = per;
-                    Response.Redirect("PrivateArea.aspx");                    
+                    sendRegMessage(per.CustomId, 0.ToString(), per.FullName);
+
                 }
             }
         }
@@ -125,19 +129,51 @@ namespace WebApplication2
 
             if (persn != null)
             {
-                Session["Person"] = persn;
-                Response.Redirect("PrivateArea.aspx");
+                if (persn.CustomId > 0)
+                {
+                    Session["Person"] = persn;
+                    if (persn.role == 1)
+                    {
+                        Response.Redirect("PrivateArea.aspx");
+                    }
+                    else if (persn.role == 3)
+                    {
+                        Response.Redirect("admin.aspx");
+                    }
+                }
+                else if (persn.CustomId == -2)
+                {
+                    showErrorMwssage(1);
+                }
+                else if (persn.CustomId == -3)
+                {
+                    showErrorMwssage(2);
+                }
+                else
+                {
+                    showErrorMwssage(3);
+                }
             }
-            else {
-                LtlMsg.Text = "<script> alert('הזנת סיסמה שגויה /n נא נסה שוב')</script>";
-                TextBox2.Focus();
-            }
-                
+
         }
 
         protected void LinkForget_Click(object sender, EventArgs e)
         {
             Response.Redirect("ForgetPassword.aspx");
         }
+
+        private void sendRegMessage(int customerId, string orderId, string name)
+        {
+            chatMessage message = new chatMessage(customerId, int.Parse(orderId), 0, " היי " + name + " , ");
+            message.addMessage();
+            message.messageText = "ברכות על רישומך למערכת \n מספר הלקוח שלך הוא " + customerId;
+            message.addMessage();
+        }
+
+        private void showErrorMwssage(int id)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "messgae", "showModalMessage('" + GlobFuncs.getErrorText(id) + "')", true);
+        }
+
     }
 }

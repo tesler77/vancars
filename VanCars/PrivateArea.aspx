@@ -47,7 +47,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" EnablePartialRendering="true" runat="server"></asp:ScriptManager>
-    <section class="page-section breadcrumbs text-left">
+    <section class="page-section breadcrumbs text-left" style="z-index:0">
         <div class="container">
             <div class="page-header text-right">
                 <h1>אזור אישי</h1>
@@ -577,7 +577,7 @@
                 <div class="tab-pane fade" id="Requests">
 
 
-                    <div class="container col-md-11">
+                    <div class="container col-md-12" style="max-width :2000px">
                         <h3 class=" text-center">פניות לתמיכה ושרות לקוחות</h3>
                         <div class="messaging">
                             <div class="inbox_msg">
@@ -605,6 +605,7 @@
 
                         </div>
                     </div>
+                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                     <div class="col-md-1"></div>
                 </div>
             </div>
@@ -634,7 +635,6 @@
                     b += "<br/><br/><br/>"
                 }
                 $("#br").html(b);
-
 
                 let messagesObject = [];// הגדרה ראשונית של אובייקט ההודעות
                 // מעבר על מערך ההודעות הקיימות
@@ -691,12 +691,15 @@
                         return a.date - b.date
                     })
                 })
+
                 let activeMsg;
+
+                allOrders.push({ RentId: 0, DateOrder: '' });
                 //
                 function getChaths (){
                     for (let i = 0; i < messagesObject.length; i++) {
                         allOrders.forEach((ord, key) => {
-                            if (ord.RentId === messagesObject[i].order) {
+                            if (ord.RentId == messagesObject[i].order) {
                                 let a = document.createElement('div');
                                 a.classList.add('chat_list');
                                 a.id = 'chat' + messagesObject[i].order;
@@ -707,8 +710,10 @@
                                 let d = document.createElement('h5');
                                 let e = document.createElement('p');
                                 e.classList.add('chat_date');
-                                e.innerHTML = ord.DateOrder.replace('T',' | ');
+                                e.innerHTML = ord.DateOrder.replace('T', ' | ');
                                 d.innerHTML = ord.RentId;
+                                if (ord.RentId == 0)
+                                    d.innerHTML = 'כללי'
                                 c.appendChild(d);
                                 c.appendChild(e);
                                 b.appendChild(c);

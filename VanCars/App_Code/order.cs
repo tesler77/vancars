@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Data;
+using System.Data;
+using Newtonsoft.Json;
 
 namespace VanCars.App_Code
 {
@@ -50,5 +53,17 @@ namespace VanCars.App_Code
             Status = status;
         }
         public order() { }
+
+        public string getOrder()
+        {
+            DataBase db = new DataBase();
+            string sql = "select RentId ,CustomId,ExternalRentId,CarName,carLevel.LevelName,companys.CompanyName,Seats,GearBox,EngineCapacity,Doors,Beags,pickupBranchs.Address + ' ' + pickupCity.CityName as PickupBranchText,PickupDate,returnBranchs.Address + ' ' + returnCitys.CityName as ReturnBranchText,ReturnDate,DateOrder,statuses.statusName as Status from OrderTable inner join CarLevelTable as carLevel on OrderTable.CarLevel = carLevel.IdLevel inner join CompanysTable as companys on OrderTable.CompanyId = companys.CompanyId inner join  BranchTable as pickupBranchs on OrderTable.PickupBranch = pickupBranchs.BranchId inner join CityTable as pickupCity on pickupBranchs.CityId = pickupCity.CityId inner join BranchTable as returnBranchs on OrderTable.ReturnBranch = returnBranchs.BranchId inner join CityTable as returnCitys on returnBranchs.CityId = returnCitys.CityId inner join statusesTable as statuses on OrderTable.Status = statuses.statusId where RentId = " + this.RentId;
+            DataTable dt = db.ExecuteReader(sql);
+            if(dt.Rows.Count > 0)
+            {
+                return JsonConvert.SerializeObject(dt.Rows[0]);
+            }
+            return "";
+        }
     }
 }

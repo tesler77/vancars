@@ -20,7 +20,7 @@
         }
 
         .modal-content {
-            top: 200px;
+            top: 70px;
             border-top-width: 0px;
             margin-top: 0px;
             padding-bottom: 10px;
@@ -28,11 +28,12 @@
             padding-right: 10px;
             padding-left: 10px;
             width: 500px;
-            height: 480px;
+            height: 785px;
             border-width: 5px;
             border-color: #e00;
             border-radius: 7px;
             background-color: #f9f8f8;
+            right: 10%;
         }
 
         div#exampleModal {
@@ -47,13 +48,20 @@
             display: block;
         }
 
-        .modal{
-            z-index:-1;
+        .modal {
+            z-index: -1;
         }
-        .modal.in{
-            z-index:2;
-        }
+
+            .modal.in {
+                z-index: 2;
+            }
+
         .page-section.breadcrumbs {
+        }
+
+        div span {
+            text-align: left;
+            color: red;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -368,84 +376,118 @@
                     <div id="br"></div>
                 </div>
 
-            <div class="tab-pane fade" id="statistics">
-                <div class="col-md-12">
-                    <canvas style="height: 150px; width: 700px;" id="myChart"></canvas>
-
-                </div>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-            </div>
-            <div class="tab-pane fade" id="orders" >
-
-                <table class="table" style="margin-top: -135px">
-                    <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">מספר הזמנה</th>
-                            <th scope="col">מספר לקוח</th>
-                            <th scope="col">תאריך ביצוע</th>
-                            <th scope="col">תאריך התחלה</th>
-                            <th scope="col">תאריך סיום</th>
-                            <th scope="col">סניף</th>
-                            <th scope="col">חברה</th>
-                        </tr>
-                    </thead>
-                    <tbody id="ordersBody">
-                    </tbody>
-                </table>
-                <div class="col-md-12">
-                    <div class="row">
+                <div class="tab-pane fade" id="statistics">
+                    <div class="col-md-12">
+                        <canvas style="height: 180px; width: 700px;" id="myChart"></canvas>
                         <br />
-                        <div id="ordersNavigator" style="font-size: 26px;letter-spacing:0.6em; font-weight:700"></div>
+                        <div class="text-center">
+                            הצגת הזמנות של                            
+                            <select id="ddlMonth">
+                                <option value="1">היום האחרון</option>
+                                <option value="7">השבוע האחרון</option>
+                                <option value="30" selected="selected">החודש האחרון</option>
+                                <option value="90">שלושת החודשים האחרונים</option>
+                                <option value="180">חצי השנה האחרונה</option>
+                                <option value="365">השנה האחרונה</option>
+                            </select>
+                        </div>
+                        <br />
+                        <canvas id="myBarChart" style="height: 180px; width: 700px;"></canvas>
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                </div>
+                <div class="tab-pane fade" id="orders">
+
+                    <table class="table" style="margin-top: -135px">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">מספר הזמנה</th>
+                                <th scope="col">מספר לקוח</th>
+                                <th scope="col">תאריך ביצוע</th>
+                                <th scope="col">תאריך התחלה</th>
+                                <th scope="col">תאריך סיום</th>
+                                <th scope="col">סניף</th>
+                                <th scope="col">חברה</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersBody">
+                        </tbody>
+                    </table>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <br />
+                            <div id="ordersNavigator" style="font-size: 26px; letter-spacing: 0.4em; font-weight: 700"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="tab-pane fade" id="customers">
-                <table class="table" style="margin-top: -135px;">
-                    <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">מספר לקוח</th>
-                            <th scope="col">שם מלא</th>
-                            <th scope="col">כתובת</th>
-                            <th scope="col">שם משתמש</th>
-                            <th scope="col">טלפון</th>
-                            <th scope="col">לקוח חסום</th>
-                        </tr>
-                    </thead>
-                    <tbody id="customersBody">
-                    </tbody>
-                </table>
-            </div>
+                <div class="tab-pane fade" id="customers">
+                    <table class="table" style="margin-top: -135px;">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">מספר לקוח</th>
+                                <th scope="col">שם מלא</th>
+                                <th scope="col">כתובת</th>
+                                <th scope="col">שם משתמש</th>
+                                <th scope="col">טלפון</th>
+                                <th scope="col">לקוח חסום</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customersBody">
+                        </tbody>
+                    </table>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <br />
+                            <div id="customersNavigator" style="font-size: 26px; letter-spacing: 0.4em; font-weight: 700"></div>
+                        </div>
+                    </div>
+                </div>
 
 
 
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-                                                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog" role="document">
-                                                                            <div class="modal-content" style="top: 300px;">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                            <button type="button" id="aaa" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="visibility: hidden"/>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalTitle"></h5>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">שם שדה</th>
+                                            <th scope="col">ערך</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="modalOrderData">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" id="aaa" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="visibility: hidden" />
 
 
             </div>
@@ -455,11 +497,7 @@
     <div class="col-md-1"></div>
     <asp:Literal runat="server" ID="ltlScript"></asp:Literal>
     <script>
-        function ShowLoginModal(type,number) {
-            $("#aaa").trigger("click");
-        };
         //הגדרת אזורים בדף לניווט
-        var pagesOrders = parseInt(allOrders.length / 20) + 1;
         window.onload = function () {
             var url = document.location.toString();
             if (url.match('#')) {
@@ -499,6 +537,111 @@
             a.setAttribute('aria-expanded', 'true');
             a.style.height = 'null';
         }
+        window.onload = getCounter();
+
+        function ShowLoginModal(type, number) {
+            if (type === 'o') {
+                document.getElementById('modalTitle').innerHTML = 'פרטי הזמנה'
+                getspecificOrder(number)
+            } else {
+                document.getElementById('modalTitle').innerHTML = 'פרטי לקוח'
+                getSpecificCustomer(number)
+            }
+            $("#aaa").trigger("click");
+        };
+
+        async function getspecificOrder(id) {
+            let a = await fetch('https://localhost:44369/api/order/' + id);
+            let b = await a.json();
+            specificOrder = await JSON.parse(b)
+            specificOrder = specificOrder.Table[0];
+            a = $('#modalOrderData');
+            a.html('');
+            a.append('<tr><td>מספר הזמנה</td> <td>' + specificOrder.RentId + '</td></tr>')
+            a.append('<tr><td>מספר לקוח</td> <td>' + specificOrder.CustomId + '</td></tr>')
+            a.append('<tr><td>מספר הזמנה חיצוני</td> <td>' + specificOrder.ExternalRentId + '</td></tr>')
+            a.append('<tr><td>סוג הרכב</td> <td>' + specificOrder.CarName + '</td></tr>')
+            a.append('<tr><td>חברה</td> <td>' + specificOrder.CompanyName + '</td></tr>')
+            a.append('<tr><td>מס מקומות ישיבה</td> <td>' + specificOrder.Seats + '</td></tr>')
+            a.append('<tr><td>סוג מנוע</td> <td>' + specificOrder.GearBox + '</td></tr>')
+            a.append('<tr><td>נפח מנוע</td> <td>' + specificOrder.EngineCapacity + '</td></tr>')
+            a.append('<tr><td>מספר דלתות</td> <td>' + specificOrder.Doors + '</td></tr>')
+            a.append('<tr><td>מספר מזוודות</td> <td>' + specificOrder.Beags + '</td></tr>')
+            a.append('<tr><td>סניף איסוף</td> <td>' + specificOrder.PickupBranchText + '</td></tr>')
+            a.append('<tr><td>תאריך איסוף</td> <td>' + specificOrder.PickupDate.substring(0, 10) + '</td></tr>')
+            a.append('<tr><td>סניף החזרה</td> <td>' + specificOrder.ReturnBranchText + '</td></tr>')
+            a.append('<tr><td>תאריך החזרה</td> <td>' + specificOrder.ReturnDate.substring(0, 10) + '</td></tr>')
+            a.append('<tr><td>תאריך ביצוע הזמנה</td> <td>' + specificOrder.DateOrder.substring(0, 10) + '</td></tr>')
+            a.append('<tr><td>סטטוס הזמנה</td> <td>' + specificOrder.Status + '</td></tr>')
+        }
+
+        async function getSpecificCustomer(id) {
+            let a = await fetch('https://localhost:44369/api/user/' + id)
+            let b = await a.json();
+            specificCustomer = await JSON.parse(b);
+            specificCustomer = specificCustomer.Table[0];
+            a = $('#modalOrderData');
+            a.html('');
+            a.append('<tr><td>מספר לקוח</td> <td>' + specificCustomer.CustomId + '</td></tr>')
+            a.append('<tr><td>שם</td> <td>' + specificCustomer.FullName + '</td></tr>')
+            a.append('<tr><td>כתובת</td> <td>' + specificCustomer.Address + '</td></tr>')
+            a.append('<tr><td>עיר</td> <td>' + specificCustomer.CityName + '</td></tr>')
+            a.append('<tr><td>מס זהות</td> <td>' + specificCustomer.id + '</td></tr>')
+            a.append('<tr><td>תאריך לידה </td> <td>' + specificCustomer.BirthDay.substring(0, 10) + '</td></tr>')
+            a.append('<tr><td>מספר רישיון</td> <td>' + specificCustomer.LicenseNumber + '</td></tr>')
+            a.append('<tr><td>דרגת רישיון</td> <td>' + specificCustomer.LicenseName + '</td></tr>')
+            a.append('<tr><td>תאריך הנפקת רישיון</td> <td>' + specificCustomer.LicenseProductionDate.substring(0, 10) + '</td></tr>')
+            a.append('<tr><td>אימייל</td> <td>' + specificCustomer.Email + '</td></tr>')
+            a.append('<tr><td>טלפון</td> <td>' + specificCustomer.Phone + '</td></tr>')
+            if (specificCustomer.numberIncorrects > 3) {
+                let b = document.createElement('tr');
+                let c = document.createElement('td');
+                c.innerHTML = 'לקוח חסום';
+                b.appendChild(c);
+                let d = document.createElement('td');
+                d.classList.add('btn');
+                d.classList.add('btn-theme');
+                d.innerHTML = 'שחרור לקוח';
+                d.addEventListener('click', (event) => { releaseUser(specificCustomer.CustomId); ShowLoginModal('u', id)})
+                b.appendChild(d);
+                a.append(b);
+            } else {
+
+                a.append('<tr><td>לקוח חסום</td> <td>לא</td></tr>')
+            }
+            a.append('<tr><td>תאריך הרשמה</td> <td>' + specificCustomer.RegDate + '</td></tr>')
+        }
+
+        async function releaseUser(id) {
+            let a = await fetch('https://localhost:44369/api/user/' + id, { method: 'PUT' });
+            allCustomers.forEach((value, key) => { if (value.CustomId == id) { value.numberIncorrects = 0 } })
+            getAllCustomers(1);
+        }
+
+        let orderLenght = parseInt(allOrders.length / 20 + 1);
+        let customerLenght = parseInt(allCustomers.length / 20 + 1);
+        let specificOrder;
+        let specificCustomer;
+        let numOfBrowsers;
+        document.getElementById('ddlMonth').addEventListener('change', (event) => {
+            getOrdersCount(parseInt(document.getElementById('ddlMonth').value))
+        })
+
+        let minutsArr = [['הרגע'],
+        ['לפני דקה', 'הרגע'],
+        ['לפני 2 דקות', 'לפני דקה', 'הרגע'],
+        ['לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע'],
+        ['לפני 4 דקות', 'לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע'],
+        ['לפני 5 דקות', 'לפני 4 דקות', 'לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע'],
+        ['לפני 6 דקות', 'לפני 5 דקות', 'לפני 4 דקות', 'לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע'],
+        ['לפני 7 דקות', 'לפני 6 דקות', 'לפני 5 דקות', 'לפני 4 דקות', 'לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע'],
+        ['לפני 8 דקות', 'לפני 7 דקות', 'לפני 6 דקות', 'לפני 5 דקות', 'לפני 4 דקות', 'לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע'],
+        ['לפני 9 דקות', 'לפני 8 דקות', 'לפני 7 דקות', 'לפני 6 דקות', 'לפני 5 דקות', 'לפני 4 דקות', 'לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע'],
+        ['לפני 10 דקות', 'לפני 9 דקות', 'לפני 8 דקות', 'לפני 7 דקות', 'לפני 6 דקות', 'לפני 5 דקות', 'לפני 4 דקות', 'לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע'],
+        ['לפני 11 דקות', 'לפני 10 דקות', 'לפני 9 דקות', 'לפני 8 דקות', 'לפני 7 דקות', 'לפני 6 דקות', 'לפני 5 דקות', 'לפני 4 דקות', 'לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע'],
+        ['לפני 12 דקות', 'לפני 11 דקות', 'לפני 10 דקות', 'לפני 9 דקות', 'לפני 8 דקות', 'לפני 7 דקות', 'לפני 6 דקות', 'לפני 5 דקות', 'לפני 4 דקות', 'לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע'],
+        ['לפני 13 דקות', 'לפני 12 דקות', 'לפני 11 דקות', 'לפני 10 דקות', 'לפני 9 דקות', 'לפני 8 דקות', 'לפני 7 דקות', 'לפני 6 דקות', 'לפני 5 דקות', 'לפני 4 דקות', 'לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע']]
+
         var ctx = document.getElementById('myChart').getContext('2d');
         var chart = new Chart(ctx, {
             // The type of chart we want to create
@@ -523,20 +666,27 @@
                 }
             }
         });
-        let minutsArr = [['הרגע'],
-        ['לפני דקה', 'הרגע'],
-        ['לפני 2 דקות', 'לפני דקה', 'הרגע'],
-        ['לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע'],
-        ['לפני 4 דקות', 'לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע'],
-        ['לפני 5 דקות', 'לפני 4 דקות', 'לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע'],
-        ['לפני 6 דקות', 'לפני 5 דקות', 'לפני 4 דקות', 'לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע'],
-        ['לפני 7 דקות', 'לפני 6 דקות', 'לפני 5 דקות', 'לפני 4 דקות', 'לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע'],
-        ['לפני 8 דקות', 'לפני 7 דקות', 'לפני 6 דקות', 'לפני 5 דקות', 'לפני 4 דקות', 'לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע'],
-        ['לפני 9 דקות', 'לפני 8 דקות', 'לפני 7 דקות', 'לפני 6 דקות', 'לפני 5 דקות', 'לפני 4 דקות', 'לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע'],
-        ['לפני 10 דקות', 'לפני 9 דקות', 'לפני 8 דקות', 'לפני 7 דקות', 'לפני 6 דקות', 'לפני 5 דקות', 'לפני 4 דקות', 'לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע'],
-        ['לפני 11 דקות', 'לפני 10 דקות', 'לפני 9 דקות', 'לפני 8 דקות', 'לפני 7 דקות', 'לפני 6 דקות', 'לפני 5 דקות', 'לפני 4 דקות', 'לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע'],
-        ['לפני 12 דקות', 'לפני 11 דקות', 'לפני 10 דקות', 'לפני 9 דקות', 'לפני 8 דקות', 'לפני 7 דקות', 'לפני 6 דקות', 'לפני 5 דקות', 'לפני 4 דקות', 'לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע'],
-        ['לפני 13 דקות', 'לפני 12 דקות', 'לפני 11 דקות', 'לפני 10 דקות', 'לפני 9 דקות', 'לפני 8 דקות', 'לפני 7 דקות', 'לפני 6 דקות', 'לפני 5 דקות', 'לפני 4 דקות', 'לפני 3 דקות', 'לפני 2 דקות', 'לפני דקה', 'הרגע']]
+        let barData;
+        var barCtx = document.getElementById('myBarChart').getContext('2d');
+        var myBarChart = new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: ['ההזמנה הושלמה', 'רכב כעת בהשכרה', 'ממתין לתאריך'],
+                datasets: [{
+                    label: 'מספר הזמנות בשנה האחרונה',
+                    backgroundColor: 'rgb(230, 000, 000)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: barData
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{ ticks: { min: 0 } }]
+                }
+            }
+        })
+
+
         setInterval(() => {
             if (chart.data.labels.length < 14) {
                 chart.data.labels = minutsArr[chart.data.labels.length];
@@ -550,7 +700,8 @@
 
             }
         }, 6000)
-        let numOfBrowsers;
+
+
         setInterval((async () => {
             let a = await fetch('https://localhost:44369/api/admin');
             let u = await a.json()
@@ -568,25 +719,51 @@
             chart.data.datasets[0].data.push(numOfBrowsers);
             chart.update()
         }
-        window.onload = getCounter();
-        let orderLenght = parseInt(allOrders.length / 20 + 1);
+
+        async function getOrdersCount(id) {
+            let a = await fetch('https://localhost:44369/api/admin/' + id);
+            let b = await a.json();
+            let c = JSON.parse(b);
+            myBarChart.data.datasets[0].data = [];
+            c.forEach((value, key) => { myBarChart.data.datasets[0].data.push(value.count) });
+            myBarChart.update()
+        }
+
         function buildOrdersNavigator() {
             for (let i = orderLenght; i > 0; i--) {
                 let nav = document.createElement('span');
+                nav.classList.add('btn')
+                nav.classList.add('btn-theme')
+
                 nav.id = 'nav' + i;
-                nav.innerHTML = '   ' + i + '   ';
+                nav.innerHTML = i;
                 nav.addEventListener(('click'), (event) => {
                     getAllOrders(nav.id.substring(3))
                 })
                 document.getElementById('ordersNavigator').appendChild(nav);
             }
         }
-        buildOrdersNavigator();
+
+        function buildCustomersNavigator() {
+            for (let i = customerLenght; i > 0; i--) {
+                let nav = document.createElement('span');
+                nav.classList.add('btn')
+                nav.classList.add('btn-theme')
+
+                nav.id = 'nav' + i;
+                nav.innerHTML = i;
+                nav.addEventListener(('click'), (event) => {
+                    getAllCustomers(nav.id.substring(3))
+                })
+                document.getElementById('customersNavigator').appendChild(nav);
+            }
+        }
+
         function getAllOrders(navigator) {
 
             let body = document.getElementById('ordersBody').innerHTML = "";
 
-            if (navigator === orderLenght) {
+            if (navigator == orderLenght) {
                 for (let i = allOrders.length - 20; i < allOrders.length; i++) {
                     let tr = document.createElement('tr');
                     if (i % 2 == 1) {
@@ -594,7 +771,7 @@
                     }
                     let num = i + 1;
                     tr.innerHTML = '<th scope="row">' + num + '</th><td>' + allOrders[i].RentId + '</td><td>' + allOrders[i].CustomId + '</td><td>' + allOrders[i].DateOrder.substring(0, 10) + '</td><td>' + allOrders[i].PickupDate.substring(0, 10) + '</td><td>' + allOrders[i].ReturnDate.substring(0, 10) + '</td><td>' + allOrders[i].PickupBranch + '</td><td>' + allOrders[i].CompanyName + '</td>'
-                    tr.addEventListener('click', (event) => { ShowLoginModal('o', allOrders[i].RentId)})
+                    tr.addEventListener('click', (event) => { ShowLoginModal('o', allOrders[i].RentId) })
                     let body = document.getElementById('ordersBody').appendChild(tr);
                 }
             } else {
@@ -610,21 +787,43 @@
                 }
             }
         }
-        function getAllCustomers() {
+        function getAllCustomers(navigator) {
 
-            for (let i = 0; i < allCustomers.length; i++) {
-                let tr = document.createElement('tr');
-                if (i % 2 == 1) {
-                    tr.style.backgroundColor = 'white'
+            $('#customersBody').html('');
+
+            if (navigator == customerLenght) {
+                for (let i = allCustomers.length - 20; i < allCustomers.length; i++) {
+                    let tr = document.createElement('tr');
+                    if (i % 2 == 1) {
+                        tr.style.backgroundColor = 'white'
+                    }
+                    let num = i + 1;
+                    (allCustomers[i].numberIncorrects > 3) ? allCustomers[i].numberIncorrects = 'כן' : (allCustomers[i].numberIncorrects == 'כן') ? allCustomers[i].numberIncorrects = 'כן' : allCustomers[i].numberIncorrects = 'לא';
+                    tr.innerHTML = '<th scope="row">' + num + '</th><td>' + allCustomers[i].CustomId + '</td><td>' + allCustomers[i].FullName + '</td><td>' + allCustomers[i].Address + '</td><td>' + allCustomers[i].Email + '</td><td>' + allCustomers[i].Phone + '</td><td>' + allCustomers[i].numberIncorrects + ' </td>';
+                    tr.addEventListener('click', (event) => { ShowLoginModal('c', allCustomers[i].CustomId) })
+                    let body = document.getElementById('customersBody').appendChild(tr);
                 }
-                let num = i + 1;
-                tr.innerHTML = '<th scope="row">' + num + '</th><td>' + allCustomers[i].CustomId + '</td><td>' + allCustomers[i].FullName + '</td><td>' + allCustomers[i].Address + '</td><td>' + allCustomers[i].Email + '</td><td>' + allCustomers[i].Phone + '</td><td>' + allCustomers[i].numberIncorrects + ' </td>';
-                let body = document.getElementById('customersBody').appendChild(tr);
+            }
+            else {
+                for (let i = navigator * 20 - 20; i < navigator * 20 && i >= navigator * 20 - 20; i++) {
+                    let tr = document.createElement('tr');
+                    if (i % 2 == 1) {
+                        tr.style.backgroundColor = 'white'
+                    }
+                    let num = i + 1;
+                    (allCustomers[i].numberIncorrects > 3) ? allCustomers[i].numberIncorrects = 'כן' : (allCustomers[i].numberIncorrects == 'כן') ? allCustomers[i].numberIncorrects = 'כן' : allCustomers[i].numberIncorrects = 'לא';
+                    tr.innerHTML = '<th scope="row">' + num + '</th><td>' + allCustomers[i].CustomId + '</td><td>' + allCustomers[i].FullName + '</td><td>' + allCustomers[i].Address + '</td><td>' + allCustomers[i].Email + '</td><td>' + allCustomers[i].Phone + '</td><td>' + allCustomers[i].numberIncorrects + ' </td>';
+                    tr.addEventListener('click', (event) => { ShowLoginModal('c', allCustomers[i].CustomId) })
+                    let body = document.getElementById('customersBody').appendChild(tr);
+                }
             }
         }
-        getAllCustomers()
+
+        buildOrdersNavigator();
+        buildCustomersNavigator();
+        getAllCustomers(1)
         getAllOrders(1)
-        //$(window).resize(() => { if ($(window).width() < 742) { if ($(window).width() < 615) { document.getElementById('customers').style.top = '-1950px' } else { document.getElementById('customers').style.top = '-1554px' } } else { document.getElementById('customers').style.top = '-970px' } })
+        getOrdersCount(1)
 
     </script>
 </asp:Content>

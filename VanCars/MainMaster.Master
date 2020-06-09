@@ -4,27 +4,27 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" dir="rtl">
 <head runat="server">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-		
-		<meta charset="UTF-8"/>
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="shortcut icon" href="assets/ico/favicon.ico">
-    <link href="/css/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="/css/bootstrap/css/bootstrap-rtl.min.css" rel="stylesheet"/>
-    <link href="css/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet"/>
-    <link href="css/fontawesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/prettyphoto/css/prettyPhoto.css" rel="stylesheet">
-    <link href="css/owl-carousel2/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="css/owl-carousel2/assets/owl.theme.default.min.css" rel="stylesheet">
-    <link href="css/animate/animate.min.css" rel="stylesheet">
-    <link href="css/swiper/css/swiper.min.css" rel="stylesheet">
-    <link href="css/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-    <link href="css/theme.css" rel="stylesheet">
-   
+    <title>van cars
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <meta charset="UTF-8" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png" />
+    <link rel="shortcut icon" href="assets/ico/favicon.ico" />
+    <link href="/css/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/bootstrap/css/bootstrap-rtl.min.css" rel="stylesheet" />
+    <link href="css/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="css/fontawesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/prettyphoto/css/prettyPhoto.css" rel="stylesheet" />
+    <link href="css/owl-carousel2/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="css/owl-carousel2/assets/owl.theme.default.min.css" rel="stylesheet" />
+    <link href="css/animate/animate.min.css" rel="stylesheet" />
+    <link href="css/swiper/css/swiper.min.css" rel="stylesheet" />
+    <link href="css/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="css/theme.css" rel="stylesheet" />
+
     <script src="js/modernizr.custom.js"></script>
     <script src="js/jquery/jquery-1.11.1.min.js"></script>
-    <script src="js/jquery/jquery-1.11.1.min.js"></script>
-    <%--<link href=css/mysheet.css" type="text/css" rel="stylesheet" />--%>
 
 
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -32,186 +32,143 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-   <div id="preloader">
-    <div id="preloader-status">
-        <div class="spinner">
-            <div class="rect1"></div>
-            <div class="rect2"></div>
-            <div class="rect3"></div>
-            <div class="rect4"></div>
-            <div class="rect5"></div>
+    <div id="preloader">
+        <div id="preloader-status">
+            <div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+            <div id="preloader-title">Loading</div>
         </div>
-        <div id="preloader-title">Loading</div>
     </div>
-</div>
-<!-- /PRELOADER -->
+    <!-- /PRELOADER -->
 
-<!-- WRAPPER -->
-<div class="wrapper">
+    <!-- WRAPPER -->
+    <div class="wrapper">
 
-    <!-- HEADER -->
-    <header class="header fixed">
-        <div class="header-wrapper">
-            <div class="container">
+        <!-- HEADER -->
+        <header class="header fixed">
+            <div class="header-wrapper">
+                <div class="container">
 
-                <!-- Logo -->
-                <div class="logo">
-                    <a href="index.html"><img src="\data\pics\aaa.png" alt="Rent It"/></a>
-                </div>
-                <!-- /Logo -->
+                    <!-- Logo -->
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="\data\pics\aaa.png" alt="Rent It" /></a>
+                    </div>
+                    <!-- /Logo -->
 
-                <!-- Mobile menu toggle button -->
-                <a href="#" class="menu-toggle btn ripple-effect btn-theme-transparent"><i class="fa fa-bars"></i></a>
-                <!-- /Mobile menu toggle button -->
+                    <!-- Mobile menu toggle button -->
+                    <a href="#" class="menu-toggle btn ripple-effect btn-theme-transparent"><i class="fa fa-bars"></i></a>
+                    <!-- /Mobile menu toggle button -->
 
-                <!-- Navigation -->
-                <nav class="navigation closed clearfix">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <!-- navigation menu -->
-                            <a href="#" class="menu-toggle-close btn"><i class="fa fa-times"></i></a>
-                            <ul class="nav sf-menu">
+                    <!-- Navigation -->
+                    <nav class="navigation closed clearfix">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <!-- navigation menu -->
+                                <a href="#" class="menu-toggle-close btn"><i class="fa fa-times"></i></a>
+                                <ul class="nav sf-menu">
 
-                               
-                                <li class="active"><a href="index.html">דף הבית</a> 
-                                </li>
-                                <li><a href="car-listing.html">מבצעים חמים</a></li>
-                                <li><a href="search.aspx">רכבים</a></li>
-                                <li><a href="faqs.html">שאלות</a></li>
-                                <li class="megamenu sale"><a href="#">אפשרויות</a>
-                                   
-                                    <ul>
-                                        <li class="row">
-                                            <div class="col-md-3">
-                                                <h4 class="block-title"><span>Paragraph</span></h4>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                                                <p>Suspendisse molestie est nec tortor placerat, vel pellentesque metus sollicitudin. Suspendisse congue sem mauris, at ultrices felis blandit non.</p>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <h4 class="block-title"><span>Portfolio</span></h4>
-                                                <ul>
-                                                    <li><a href="portfolio.html">Portfolio 3 Columns</a></li>
-                                                    <li><a href="portfolio-4col.html">Portfolio 4 Columns</a></li>
-                                                    <li><a href="portfolio-alt.html">Portfolio Alternate</a></li>
-                                                    <li><a href="portfolio-single.html">Portfolio Single</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <h4 class="block-title"><span>Pages</span></h4>
-                                                <ul>
-                                                    <li><a href="shortcodes.html">Shortcodes</a></li>
-                                                    <li><a href="typography.html">Typography</a></li>
-                                                    <li><a href="coming-soon.html">Coming soon</a></li>
-                                                    <li><a href="error-page.html">404 Page</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <h4 class="block-title"><span>Pages</span></h4>
-                                                <ul>
-                                                    <li><a href="car-listing.html">Car Listing</a></li>
-                                                    <li><a href="booking.html">Booking & Payment</a></li>
-                                                    <li><a href="about.html">About</a></li>
-                                                    <li><a href="login.html">Login</a></li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a href="blog.html">בלוג</a>
-                                    <ul>
-                                        <li><a href="blog.html">Blog Sidebar Left </a></li>
-                                        <li><a href="blog-right.html">Blog Sidebar Right</a></li>
-                                        <li><a href="blog-post.html">Blog Single Post</a></li>
-                                    </ul>
-                                </li>
-                                <li id="contact"><a href="contact.html">צור קשר</a></li>
-                                <li>
-                                    <ul class="social-icons">
-                                        <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-                                        <li><a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a></li>
-                                    </ul>
-                                     <li id="HlloGuest" style="margin-top:7px;margin-right:10px"><asp:Literal ID="LtlHeader" runat="server" Text="שלום אורח" ></asp:Literal></li> 
-                                </li>
-                            </ul>
-                            <!-- /navigation menu -->
+
+                                    <li class="active"><a href="index.html">דף הבית</a>
+                                    </li>
+                                    <li><a href="car-listing.html">מבצעים חמים</a></li>
+                                    <li><a href="search.aspx">רכבים</a></li>
+                                    <li><a href="admin.aspx">שאלות</a></li>
+                                    <li><a href="blog.html">בלוג</a>
+                                        <ul>
+                                            <li><a href="blog.html">Blog Sidebar Left </a></li>
+                                            <li><a href="blog-right.html">Blog Sidebar Right</a></li>
+                                            <li><a href="blog-post.html">Blog Single Post</a></li>
+                                        </ul>
+                                    </li>
+                                    <li id="contact"><a href="ContactUs.aspx">צור קשר</a></li>
+                                    <li><a id="guest" runat="server" href="PrivateArea.aspx">שלום אורח</a></li>
+                                </ul>
+                                <!-- /navigation menu -->
+                            </div>
                         </div>
-                    </div>
-                    <!-- Add Scroll Bar -->
-                    <div class="swiper-scrollbar"></div>
-                </nav>
-                <!-- /Navigation -->
-
-            </div>
-        </div>
-
-    </header>       
-    <form id="form1" runat="server">
-    <div>
-    
- 
-      
-
-		
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        
-        </asp:ContentPlaceHolder>
-    </div>
-    </form>
-     <!-- FOOTER -->
-    <footer class="footer">
-        <div class="footer-meta">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-sm-12">
-                        <p class="btn-row text-center">
-                            <a href="#" class="btn btn-theme ripple-effect btn-icon-left facebook wow fadeInDown" data-wow-offset="20" data-wow-delay="100ms"><i class="fa fa-facebook"></i>FACEBOOK</a>
-                            <a href="#" class="btn btn-theme btn-icon-left ripple-effect twitter wow fadeInDown" data-wow-offset="20" data-wow-delay="200ms"><i class="fa fa-twitter"></i>TWITTER</a>
-                            <a href="#" class="btn btn-theme btn-icon-left ripple-effect pinterest wow fadeInDown" data-wow-offset="20" data-wow-delay="300ms"><i class="fa fa-pinterest"></i>PINTEREST</a>
-                            <a href="#" class="btn btn-theme btn-icon-left ripple-effect google wow fadeInDown" data-wow-offset="20" data-wow-delay="400ms"><i class="fa fa-google"></i>GOOGLE</a>
-                        </p>
-                        <div class="copyright">&copy; 2015 Rent It — An One Page Rental Car Theme made with passion by jThemes Studio</div>
-                    </div>
+                        <!-- Add Scroll Bar -->
+                        <div class="swiper-scrollbar"></div>
+                    </nav>
+                    <!-- /Navigation -->
 
                 </div>
             </div>
-        </div>
-    </footer>
-    <!-- /FOOTER -->
 
-    <div id="to-top" class="to-top"><i class="fa fa-angle-up"></i></div>
-
-</div>
-<!-- /WRAPPER -->
+        </header>
+        <form id="form1" runat="server">
+            <div>
 
 
-<script src="js/bootstrap/js/bootstrap.min.js"></script>
-<script src="js/bootstrap-select/js/bootstrap-select.min.js"></script>
-<script src="js/superfish/js/superfish.min.js"></script>
-<script src="js/prettyphoto/js/jquery.prettyPhoto.js"></script>
-<script src="js/owl-carousel2/owl.carousel.min.js"></script>
-<script src="js/jquery.sticky.min.js"></script>
-<script src="js/jquery.easing.min.js"></script>
-<script src="js/jquery.smoothscroll.min.js"></script>
-<!--<script src="assets/plugins/smooth-scrollbar.min.js"></script>-->
-<!--<script src="assets/plugins/wow/wow.min.js"></script>-->
-<script>
+
+
+
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </form>
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-meta">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+                            <p class="btn-row text-center">
+                                <a href="#" class="btn btn-theme ripple-effect btn-icon-left facebook wow fadeInDown" data-wow-offset="20" data-wow-delay="100ms"><i class="fa fa-facebook"></i>FACEBOOK</a>
+                                <a href="#" class="btn btn-theme btn-icon-left ripple-effect twitter wow fadeInDown" data-wow-offset="20" data-wow-delay="200ms"><i class="fa fa-twitter"></i>TWITTER</a>
+                                <a href="#" class="btn btn-theme btn-icon-left ripple-effect pinterest wow fadeInDown" data-wow-offset="20" data-wow-delay="300ms"><i class="fa fa-pinterest"></i>PINTEREST</a>
+                                <a href="#" class="btn btn-theme btn-icon-left ripple-effect google wow fadeInDown" data-wow-offset="20" data-wow-delay="400ms"><i class="fa fa-google"></i>GOOGLE</a>
+                            </p>
+                            <div class="copyright">&copy; 2015 Rent It — An One Page Rental Car Theme made with passion by jThemes Studio</div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- /FOOTER -->
+
+        <div id="to-top" class="to-top"><i class="fa fa-angle-up"></i></div>
+
+    </div>
+    <!-- /WRAPPER -->
+
+
+    <script src="js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="js/superfish/js/superfish.min.js"></script>
+    <script src="js/prettyphoto/js/jquery.prettyPhoto.js"></script>
+    <script src="js/owl-carousel2/owl.carousel.min.js"></script>
+    <script src="js/jquery.sticky.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.smoothscroll.min.js"></script>
+    <!--<script src="assets/plugins/smooth-scrollbar.min.js"></script>-->
+    <!--<script src="assets/plugins/wow/wow.min.js"></script>-->
+    <script>
     // WOW - animated content
     //new WOW().init();
-</script>
-<script src="js/swiper/js/swiper.jquery.min.js"></script>
-<script src="js/datetimepicker/js/moment-with-locales.min.js"></script>
-<script src="js/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    </script>
+    <script src="js/swiper/js/swiper.jquery.min.js"></script>
+    <script src="js/datetimepicker/js/moment-with-locales.min.js"></script>
+    <script src="js/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 
-<!-- JS Page Level -->
-<script src="js/theme-ajax-mail.js"></script>
-<script src="js/theme.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZGBCDzrOfP9B583liqId5Mz5KBqmEOQk&callback=initMap" async defer></script>
+    <!-- JS Page Level -->
+    <script src="js/theme-ajax-mail.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZGBCDzrOfP9B583liqId5Mz5KBqmEOQk&callback=initMap" async defer></script>
+    <script>
+        let guest = document.getElementById('guest');
+        window.onresize = function () { if (window.innerWidth > 991) { guest.style.color = 'black' } else { guest.style.color = '' } }
+        window.onload = function () { if (window.innerWidth > 991) { guest.style.color = 'black' } else { guest.style.color = '' }}
 
-<asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
-        
-</asp:ContentPlaceHolder>
+    </script>
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+    </asp:ContentPlaceHolder>
 </body>
 </html>

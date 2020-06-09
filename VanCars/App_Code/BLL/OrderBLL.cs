@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using SearchBLL;
 using VanCars.App_Code.DAL;
+using VanCars.App_Code.BLL;
 
 namespace VanCars.App_Code.BLL
 {
@@ -18,8 +19,9 @@ namespace VanCars.App_Code.BLL
         public List<Extention> extetions { get; set; }
         public searchBLL Search { get; set; }
         public person person { get; set; }
+        public creaditCardBLL creaditCard { get; set; }
 
-        public OrderBLL(int company,  int pickupBranch, int returnBranch, DateTime pickupDate, DateTime returnDate, int carId, List<Extention> extetions, searchBLL search, person person)
+        public OrderBLL(int company,  int pickupBranch, int returnBranch, DateTime pickupDate, DateTime returnDate, int carId, List<Extention> extetions, searchBLL search, person person, creaditCardBLL creaditCard)
         {
             Company = company;
             PickupBranch = pickupBranch;
@@ -31,11 +33,13 @@ namespace VanCars.App_Code.BLL
             this.extetions = extetions;
             Search = search;
             this.person = person;
+            this.creaditCard = creaditCard;
         }
 
         public List<string> CreateOrder()
         {
-            OrderDAL order = new OrderDAL(this.Company,this.PickupBranch,this.ReturnBranch,this.PickupDate,this.ReturnDate,this.CarId,this.extetions,this.Search,this.person);
+
+            OrderDAL order = new OrderDAL(this.Company,this.PickupBranch,this.ReturnBranch,this.PickupDate,this.ReturnDate,this.CarId,this.extetions,this.Search,this.person,this.creaditCard);
             return order.CreateExtOrder();             
         }
     }

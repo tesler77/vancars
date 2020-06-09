@@ -1,9 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="search.aspx.cs" Inherits="WebApplication2.search" %>
 
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
-<%@ Register TagName="Reg" Src="~/RegUc.ascx" TagPrefix="uc" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server" EnablePartialRendering="true">
+    <%--<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>--%>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />       
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" EnablePartialRendering="true" runat="server" />
@@ -100,20 +102,11 @@
                                                                 <div class="container-fluid">
                                                                     <div class="col-sm-12">
                                                                         <div class="form-group has-icon has-label">
-                                                                            <label for="formSearchUpDate2">Picking Up Date</label>
-                                                                            <asp:TextBox runat="server" ID="PickupDate" CssClass="form-control datepicker" placeholder="dd/mm/yyyy"></asp:TextBox>
-                                                                            <span class="form-control-icon"><i class="fa fa-calendar"></i></span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                                            <label for="formSearchOffDate2">טווח תאריכים</label>
+                                                                            <%--<asp:TextBox runat="server" ID="ReturnDate" CssClass="form-control datepicker" placeholder="dd/mm/yyyy"></asp:TextBox>--%>
+                                                                                        <input type="text" name="daterange" id="returnda" class="form-control" placeholder="mm/dd/yyyy - mm/dd/yyyy" onchange="changeDate(this.value)" />
 
-                                                            <div class="row row-inputs">
-                                                                <div class="container-fluid">
-                                                                    <div class="col-sm-12">
-                                                                        <div class="form-group has-icon has-label">
-                                                                            <label for="formSearchOffDate2">Picking Off Date</label>
-                                                                            <asp:TextBox runat="server" ID="ReturnDate" CssClass="form-control datepicker" placeholder="dd/mm/yyyy"></asp:TextBox>
+                                                                            <asp:TextBox runat="server" ID="ReturnDate" CssClass="form-control daterangepicker" placeholder="dd/mm/yyyy"></asp:TextBox>
                                                                             <span class="form-control-icon"><i class="fa fa-calendar"></i></span>
                                                                         </div>
                                                                     </div>
@@ -130,14 +123,6 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog" role="document">
-                                                                            <div class="modal-content" style="top: 300px;">
-                                                                                <uc:Reg ID="bbb" runat="server" />
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
                                                                 </ContentTemplate>
                                                             </asp:UpdatePanel>
                                                         </div>
@@ -165,6 +150,12 @@
             </button>
 
             <script>
+
+                $('input[name="daterange"]').daterangepicker({
+                    "autoApply": true,
+                }, function (start, end, label) {
+                    console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+                });
                 var pos
                 var branchs
                 var br
@@ -264,7 +255,13 @@
                     GetBranchs()
 
                 }
+                function changeDate(newDate) {
 
+                 document.getElementById('ContentPlaceHolder1_ReturnDate').text = newDate
+                    let retDate = document.getElementById('<%= ReturnDate.ClientID %>').value = newDate
+                    retDate.Text = newDate;
+                }
+                $(document).ready(() => { $('#returnda').val('')})
             </script>
         </section>
         <!-- /PAGE -->

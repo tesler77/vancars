@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using VanCars.App_Code;
+using BLL;
 
 namespace WebApplication2
 {
@@ -18,7 +19,8 @@ namespace WebApplication2
                 per = (person)Session["Person"];
                 if (per != null)
                 {
-                    LtlHeader.Text = "שלום " + per.FullName+", משתמש";
+                    Users users = new Users(per.CustomId);
+                    guest.InnerHtml = "שלום " + per.FullName +" "+ users.getUserRole();
                 }
             }
 

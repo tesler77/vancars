@@ -15,9 +15,7 @@ namespace VanCars
         {
             if(!IsPostBack)
             {
-                person per = new person();
-                per = (person)Session["Person"];
-                LtlMsg.Text = " שלום" + per.FullName;
+
             }
 
         }

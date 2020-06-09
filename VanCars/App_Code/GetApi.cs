@@ -24,7 +24,8 @@ namespace VanCars.App_Code
             http.Timeout = 1000000;
             string parsedContent = Query;
             ASCIIEncoding encoding = new ASCIIEncoding();
-            Byte[] bytes = encoding.GetBytes(parsedContent);
+            //Byte[] bytes = encoding.GetBytes(parsedContent);
+            Byte[] bytes = Encoding.UTF8.GetBytes(parsedContent);
 
             Stream newStream = http.GetRequestStream();
             newStream.Write(bytes, 0, bytes.Length);

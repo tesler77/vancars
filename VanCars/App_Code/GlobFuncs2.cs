@@ -8,13 +8,14 @@ using System.IO;
 using Data;
 using System.Data;
 using Newtonsoft.Json;
+using VanCars.App_Code;
 
 namespace Glob
 
 {
     public static partial class GlobFuncs
     {
-        public static string EncryptString(string plainText,string key )
+        public static string EncryptString(string plainText, string key)
         {
             byte[] iv = new byte[16];
             byte[] array;
@@ -43,7 +44,7 @@ namespace Glob
             return Convert.ToBase64String(array);
 
         }
-            public static string decription(string inputText,string key)
+        public static string decription(string inputText, string key)
         {
             byte[] iv = new byte[16];
             byte[] buffer = Convert.FromBase64String(inputText);
@@ -61,13 +62,13 @@ namespace Glob
             Double min = 100000000;
             Double max = 999999999;
             Random random = new Random();
-            Double num =  random.NextDouble() * (max - min) + min;
+            Double num = random.NextDouble() * (max - min) + min;
             string number = num.ToString();
-            number = number.Replace('.','5');
+            number = number.Replace('.', '5');
             DataBase db = new DataBase();
-            string sql = "select id from CreditCardsTable where id = '" + number +"'";
+            string sql = "select id from CreditCardsTable where id = '" + number + "'";
             string ret = db.ExecuteScalar(sql);
-            if(ret == "a")
+            if (ret == "a")
             {
                 return number;
             }
@@ -99,9 +100,9 @@ namespace Glob
             dt = db.ExecuteReader(sql);
             return JsonConvert.SerializeObject(dt);
         }
-        public static List<Item> addMoreLine(List<Item> ddlList,string name)
+        public static List<Item> addMoreLine(List<Item> ddlList, string name)
         {
-            ddlList.Add(new Item(9999," להוספת" +name));
+            ddlList.Add(new Item(9999, " להוספת" + name));
             return ddlList;
         }
 
@@ -120,7 +121,52 @@ namespace Glob
             DataTable dt = db.ExecuteReader(sql);
             return JsonConvert.SerializeObject(dt);
         }
-        
+
+        public static string getCountOrders(int days)
+        {
+            DataBase db = new DataBase();
+            DataTable dt = new DataTable();
+            DataColumn count = dt.Columns.Add("count", typeof(int));
+
+            for (int i = 1; i < 4; i++)
+            {
+                string sql = "select COUNT(RentId) as count from OrderTable where DateOrder > GETDATE()-" + days + " and status = " + i;
+                string ret = db.ExecuteScalar(sql);
+                DataRow row = dt.NewRow();
+                row["count"] = int.Parse(ret);
+                dt.Rows.Add(row);
+            }
+            return JsonConvert.SerializeObject(dt);
+        }
+
+        public static List<Extention> convertExtensionToList(string ext)
+        {
+            DataTable table = new DataTable();
+            table = JsonConvert.DeserializeObject<DataTable>(ext);
+            List<Extention> extentions = new List<Extention>();
+            if (table.Rows.Count > 0)
+            {
+                foreach (DataRow dr in table.Rows)
+                {
+                    extentions.Add(new Extention(int.Parse(dr["id"].ToString()), dr["description"].ToString(), int.Parse(dr["Price"].ToString())));
+                }
+            }
+            return extentions;
+        }
+
+        public static string convertExtensionToString(List<Extention> extentions)
+        {
+            string temp = "";
+            if (extentions.Count > 0)
+            {
+                foreach (Extention ext in extentions)
+                {
+                    temp += ext.id.ToString() + ",";
+                }
+                temp = temp.Substring(0, temp.Length - 1);
+            }
+            return temp;
+        }
     }
 }
 

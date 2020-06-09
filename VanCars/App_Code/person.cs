@@ -14,6 +14,7 @@ namespace VanCars.App_Code
         public string LiccensNumber { get; set; }
         public string TelNumber { get; set; }
         public string PhoneNumber { get; set; }
+        public int role { get; set; }
 
         public person(int CustomId,string FullName,string Email)
         {

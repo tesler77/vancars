@@ -132,7 +132,11 @@ namespace BLL
             string success = ud.saveChange();
         }
         
-
+        public string getUserRole()
+        {
+            UserDAL user = new UserDAL() { UserId = this.UserId };
+            return user.getUserRole();
+        }
 
     }
 }

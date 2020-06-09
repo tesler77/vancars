@@ -77,5 +77,28 @@ namespace VanCars.App_Code.DAL
             DataBase db = new DataBase();
             return db.ExecuteNonQuery(sql);
         }
+
+        public void getCardDetails()
+        {
+            string sql = "select * from CreditCardsTable where id = '" + this.id+"'";
+            DataBase dataBase = new DataBase();
+            DataTable dataTable = dataBase.ExecuteReader(sql);
+            if(dataTable.Rows.Count == 0)
+            {
+                this.id = "-1";
+                return ;
+            }
+            else
+            {
+                DataRow row = dataTable.Rows[0];
+                this.id = row["id"].ToString();
+                this.number = GlobFuncs.decription( row["number"].ToString(), "b1bbc4ca589133e2e8a4e4a2315a1916");
+                this.month = row["month"].ToString();
+                this.year = row["year"].ToString();
+                this.digitNo = row["digitNo"].ToString();
+                this.ownerId = row["ownerId"].ToString();
+                return ;
+            }
+        }
     }
 }

@@ -50,11 +50,6 @@ namespace WebApplication2
                 CreateAlert("נא הזן סניף החזרת רכב");
                 DdlReturnLocation.Focus();
             }
-            else if(PickupDate.Text.Length <= 10)
-            {
-                CreateAlert("נא הזן תאריך לקיחת רכב");
-                PickupDate.Focus();
-            }
             else if(ReturnDate.Text.Length <= 10)
             {
                 CreateAlert("נא הזן תאריך החזרת רכב");
@@ -63,7 +58,7 @@ namespace WebApplication2
             else
             {                
                 person per = new person();
-                Session["search"] = new searchBLL(DdlPickupLocation.Text.ToString(), PickupDate.Text.ToString(), DdlReturnLocation.Text.ToString(), ReturnDate.Text.ToString());
+                Session["search"] = new searchBLL(DdlPickupLocation.Text.ToString(), ReturnDate.Text.ToString().Substring(0,10), DdlReturnLocation.Text.ToString(), ReturnDate.Text.ToString().Substring(13));
                 Response.Redirect("results.aspx");
             }
 
@@ -76,9 +71,8 @@ namespace WebApplication2
                 CreateSearch();
             }
             else
-            {      
-                
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "PopUp", "ShowLoginModal()", true);
+            {
+                CreateSearch();
             }
         }
 

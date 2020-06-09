@@ -32,7 +32,7 @@
                             <div class="media">
                                 <i class="pull-right fa fa-phone"></i>
                                 <div class="media-body">
-                                    <strong>טלפון:</strong><br>
+                                    <strong>טלפון:</strong><br/>
                                     <asp:Literal ID="LtlPhone" runat="server"></asp:Literal>
                                 </div>
                             </div>

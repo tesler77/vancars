@@ -66,6 +66,22 @@ namespace VanCars.App_Code.BLL
             };
             return creditCard.deleteCard();
         }
+
+        public void getCardDetails(string id)
+        {
+            creditCardDAL creditCard = new creditCardDAL()
+            {
+                id = id
+            };
+            creditCard.getCardDetails();
+            this.id = creditCard.id;
+            this.number = creditCard.number;
+            this.month = creditCard.month;
+            this.year = creditCard.year;
+            this.digitNo = creditCard.digitNo;
+            this.ownerId = creditCard.ownerId;
+            return;
+        }
         
     }
 }

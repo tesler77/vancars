@@ -13,6 +13,15 @@ namespace WebApplication2 {
     public partial class Reg {
         
         /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        
+        /// <summary>
         /// TxtName control.
         /// </summary>
         /// <remarks>
@@ -130,13 +139,13 @@ namespace WebApplication2 {
         protected global::System.Web.UI.WebControls.CheckBox checkbox1;
         
         /// <summary>
-        /// LtlMsg control.
+        /// regUpdatePanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal LtlMsg;
+        protected global::System.Web.UI.UpdatePanel regUpdatePanel;
         
         /// <summary>
         /// BtnReg control.

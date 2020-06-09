@@ -5,5 +5,8 @@
     <br />
     <br />
     <br />
+<asp:RadioButton ID="rd1" runat="server" text="aaa" GroupName="abc" />
+<asp:RadioButton ID="rd2" runat="server" text="bbb" GroupName="abc" />
+<asp:RadioButton ID="rd3" runat="server" text="ccc" GroupName="abc" />
         <asp:Literal ID="LtlMsg" runat="server" Text="" />    
 </asp:Content>
