@@ -42,43 +42,43 @@ namespace WebApplication2
 
             if (DdlPickupLocation.SelectedValue == "-1")
             {
-                CreateAlert("נא הזן סניף לקיחת רכב");
-                DdlPickupLocation.Focus();
+                showErrorMwssage(2006);
             }
             else if (DdlReturnLocation.SelectedValue == "-1")
             {
-                CreateAlert("נא הזן סניף החזרת רכב");
-                DdlReturnLocation.Focus();
+                showErrorMwssage(2007);
             }
             else if(ReturnDate.Text.Length <= 10)
             {
-                CreateAlert("נא הזן תאריך החזרת רכב");
-                ReturnDate.Focus();
+                showErrorMwssage(2008);
             }
             else
             {                
-                person per = new person();
                 Session["search"] = new searchBLL(DdlPickupLocation.Text.ToString(), ReturnDate.Text.ToString().Substring(0,10), DdlReturnLocation.Text.ToString(), ReturnDate.Text.ToString().Substring(13));
-                Response.Redirect("results.aspx");
             }
 
         }
 
         protected void BtnSearch_Click(object sender, EventArgs e)
         {
-            if(Session["person"] != null)
+            CreateSearch();
+            if (Session["person"] != null)
             {
-                CreateSearch();
+                person per = (person)Session["person"];
+                GlobFuncs.addSearch(ReturnDate.Text.ToString().Substring(0, 10), ReturnDate.Text.ToString().Substring(13), DdlPickupLocation.Text.ToString(), DdlReturnLocation.Text.ToString(), per.CustomId);                
             }
-            else
-            {
-                CreateSearch();
-            }
+            Response.Redirect("results.aspx");
+
         }
 
         private void CreateAlert(string text)
         {
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert", "alert('"+text+"')", true);
+        }
+
+        private void showErrorMwssage(int id)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "messgae", "showModalMessage('" + GlobFuncs.getErrorText(id) + "')", true);
         }
 
     }

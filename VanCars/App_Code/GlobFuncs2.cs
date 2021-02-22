@@ -9,6 +9,8 @@ using Data;
 using System.Data;
 using Newtonsoft.Json;
 using VanCars.App_Code;
+using VanCars.App_Code.BLL;
+using SearchBLL;
 
 namespace Glob
 
@@ -86,7 +88,7 @@ namespace Glob
         }
         public static string getChathMasseges(int id)
         {
-            string sql = "select * from chathTable where customerId = " + id;
+            string sql = "select * from chathTable where customerId = " + id ;
             DataBase db = new DataBase();
             DataTable dt = new DataTable();
             dt = db.ExecuteReader(sql);
@@ -166,6 +168,78 @@ namespace Glob
                 temp = temp.Substring(0, temp.Length - 1);
             }
             return temp;
+        }
+
+        public static DataTable getCarsApis()
+        {
+            string sql = "select CompanyId,ApiAddress from CompanysTable";
+            DataBase db = new DataBase();
+            DataTable table = db.ExecuteReader(sql);
+            return table;
+        }
+
+        public static string getExtByOrderId(string orderId) {
+            string sql = "select ExtentionId from ExtensInOrder where OrderId = " + orderId;
+            DataBase db = new DataBase();
+            DataTable table = db.ExecuteReader(sql);
+            return JsonConvert.SerializeObject(table);
+        }
+
+        public static string getCreditCardOfOrder(int orderId)
+        {
+            string sql = "select creditCardId from OrderTable where RentId = " + orderId;
+            DataBase db = new DataBase();
+            return db.ExecuteScalar(sql);
+        }
+
+        public static string getExtenalOrderIdByOrderId(int orderId)
+        {
+            string sql = "select ExternalRentId from OrderTable where RentId = " + orderId;
+            DataBase db = new DataBase();
+            return db.ExecuteScalar(sql);
+        }
+
+        public static string[] getUnreadChats()
+        {
+            string sql = "select * from chathTable where orderId in ( select distinct orderId from chathTable where messageStatus = 1 ) order by orderId,sendDate";
+            DataBase db = new DataBase();
+            DataTable unRead = db.ExecuteReader(sql);
+            sql = "select * from chathTable where orderId not in ( select distinct orderId from chathTable where messageStatus = 1 ) and orderId not in   ( select distinct orderId from chathTable where messageStatus = 4 ) order by orderId,sendDate";
+            DataTable readed = db.ExecuteReader(sql);
+            string[] ret = new string[2];
+            ret[0] = JsonConvert.SerializeObject(unRead);
+            ret[1] = JsonConvert.SerializeObject(readed);
+            return ret;
+        }
+        public static void addSearch(string fromDate,string toDate,string fromLocation,string toLocation,int customId)
+        {
+            string sql = "insert into SearchTable (CustomerId,FromDate,FromLocation,ToLocation,ToDate) values(" + customId + ",'" + fromDate + "','" + fromLocation + "','" + toLocation + "','" + toDate + "')";
+            DataBase db = new DataBase();
+            db.ExecuteNonQuery(sql);
+        }
+
+        public static string getAllSearchesByUser(int userId)
+        {
+            string sql = "select * from UserSearchesView where CustomerId = " + userId + "ORDER BY searchDate DESC";
+            DataBase db = new DataBase();
+            DataTable dt = new DataTable();
+            dt = db.ExecuteReader(sql);
+            return JsonConvert.SerializeObject(dt);
+        }
+        public static searchBLL getSearchById(int id)
+        {
+            string sql = "select * from SearchTable where id = " + id;
+            DataBase db = new DataBase();
+            DataTable dt = db.ExecuteReader(sql);
+            searchBLL search = new searchBLL(dt.Rows[0]["FromLocation"].ToString(), dt.Rows[0]["FromDate"].ToString(), dt.Rows[0]["ToLocation"].ToString(), dt.Rows[0]["ToDate"].ToString());
+            return search;
+        }
+
+        public static DataTable getOrderDataByOrderId(int orderId)
+        {
+            DataBase db = new DataBase();
+            string sql = "select * from FullOrdersDataView where RentId = " + orderId;
+            return db.ExecuteReader(sql);
         }
     }
 }

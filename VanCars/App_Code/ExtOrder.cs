@@ -25,8 +25,9 @@ namespace ExternalOrder
         public string cardYear { get; set; }
         public string digitNo { get; set; }
         public string ownerId { get; set; }
+        public string notes { get; set; }
 
-        public ExtOrder(string idNumber, string name, string telNo, string phone, string licenssNo, int pickupBranch, int returnBranch, string pickupDate, string returnDate, int carId, int rentersAge,string containExtensions,string cardNumber,string cardMonth,string cardYear,string digitNo,string ownerId)
+        public ExtOrder(string idNumber, string name, string telNo, string phone, string licenssNo, int pickupBranch, int returnBranch, string pickupDate, string returnDate, int carId, int rentersAge,string containExtensions,string cardNumber,string cardMonth,string cardYear,string digitNo,string ownerId,string notes)
         {
             IdNumber = idNumber;
             Name = name;
@@ -45,6 +46,7 @@ namespace ExternalOrder
             this.cardYear = cardYear;
             this.digitNo = digitNo;
             this.ownerId = ownerId;
+            this.notes = notes;
                 
         }
     }

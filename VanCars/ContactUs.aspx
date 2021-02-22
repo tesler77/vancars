@@ -3,13 +3,20 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:ScriptManager ID="scriptManager" runat="server"></asp:ScriptManager>
     <div class="content-area">
 
         <style>
-            #map{
-                height:700px;
-                width:80%;
-                
+            #map {
+                height: 700px;
+                width: 80%;
+            }
+
+
+            .modal-backdrop.in {
+                opacity: .5;
+                position: relative;
+                z-index: 1;
             }
         </style>
 
@@ -83,45 +90,59 @@
                         <h2 class="block-title"><span>טופס יצירת קשר</span></h2>
 
                         <!-- Contact form -->
-                      
 
-                            <div class="outer required">
-                                <div class="form-group af-inner">
-                                    <label class="sr-only" for="name">שם</label>
-                                    <asp:TextBox ID="TxtName" runat="server" placeholder="שם" cssclass="form-control placeholder"></asp:TextBox>
-                                </div>
-                            </div>
 
-                            <div class="outer required">
-                                <div class="form-group af-inner">
-                                    <label class="sr-only" for="email">אמייל</label>
-                                    <asp:TextBox ID="TxtEmail" runat="server" placeholder="אמייל" cssclass="form-control placeholder"></asp:TextBox>
-                     
-                                </div>
-                            </div>
-
-                            <div class="outer required">
-                                <div class="form-group af-inner">
-                                    <label class="sr-only" for="subject">נושא הפניה</label>
-                                    <asp:TextBox ID="TxtSubject" runat="server" placeholder="נושא הפניה" css  class="form-control placeholder"></asp:TextBox>
-
-                                </div>
-                            </div>
-
+                        <div class="outer required">
                             <div class="form-group af-inner">
-                                <label class="sr-only" for="input-message">פרטי הפניה</label>
-                                <asp:TextBox ID="TxtMsg" runat="server" placeholder="פרטי הפניה" cssclass="form-control placeholder" Height="200px" TextMode="MultiLine"></asp:TextBox>
-                     
+                                <label class="sr-only" for="name">שם</label>
+                                <asp:TextBox ID="TxtName" runat="server" placeholder="שם" CssClass="form-control placeholder"></asp:TextBox>
                             </div>
+                        </div>
 
-                            <div class="outer required">
-                                <div class="form-group">
-                                    <asp:Button ID="BtnSend" runat="server" cssclass="btn btn-theme btn-block center-block" Text="שלח פניה" OnClick="BtnSend_Click"/>
+                        <div class="outer required">
+                            <div class="form-group af-inner">
+                                <label class="sr-only" for="email">אמייל</label>
+                                <asp:TextBox ID="TxtEmail" runat="server" placeholder="אמייל" CssClass="form-control placeholder"></asp:TextBox>
 
+                            </div>
+                        </div>
+
+                        <div class="outer required">
+                            <div class="form-group af-inner">
+                                <label class="sr-only" for="subject">נושא הפניה</label>
+                                <asp:TextBox ID="TxtSubject" runat="server" placeholder="נושא הפניה" css class="form-control placeholder"></asp:TextBox>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group af-inner">
+                            <label class="sr-only" for="input-message">פרטי הפניה</label>
+                            <asp:TextBox ID="TxtMsg" runat="server" placeholder="פרטי הפניה" CssClass="form-control placeholder" Height="200px" TextMode="MultiLine"></asp:TextBox>
+
+                        </div>
+                        <asp:UpdatePanel ID="updatePanel" runat="server">
+                            <ContentTemplate>
+                                <div class="outer required">
+                                    <div class="form-group">
+                                        <asp:Button ID="BtnSend" runat="server" CssClass="btn btn-theme btn-block center-block" Text="שלח פניה" OnClick="BtnSend_Click" />
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="top: 35%">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalTitle">הודעה</h5>
+                                    </div>
+                                    <div class="modal-body" style="text-align: center">
+                                        <div id="messageBody"></div>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                        <button type="button" id="aaa" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="visibility: hidden" />
 
-                       
                         <!-- /Contact form -->
 
                     </div>
@@ -138,11 +159,11 @@
 
                 <!-- Google map -->
                 <div class="center-block">
-                      <div id="map" class="center-block"></div>
-                    </div>
+                    <div id="map" class="center-block"></div>
+                </div>
                 <script>
 
-                    
+
                     var map;
                     function initMap() {
                         map = new google.maps.Map(document.getElementById('map'), {
@@ -154,6 +175,10 @@
                             map: map
                         })
                     }
+                    function showModalMessage(content) {
+                        $("#messageBody").html(content)
+                        $("#aaa").trigger("click");
+                    }
                 </script>
                 <!-- /Google map -->
 
@@ -161,7 +186,6 @@
             </div>
         </section>
         <!-- /PAGE -->
-        <asp:Literal ID="ltlJs" runat="server"></asp:Literal>
     </div>
     <footer class="footer">
         <div class="footer-widgets">
@@ -171,13 +195,12 @@
                     <div class="col-md-3">
                         <div class="widget">
                             <h4 class="widget-title">אודותינו</h4>
-                            
-                            <p>אנו מתמחים בהשוואת מחירים מול כל חברות השכרת הרכבים וביצוע הזמנוצ מאובטחות  ושמירת היסטוריית הזמנות .</p>
+
+                            <p>אנו מתמחים בהשוואת מחירים מול כל חברות השכרת הרכבים וביצוע הזמנות מאובטחות  ושמירת היסטוריית הזמנות .</p>
                             <ul class="social-icons">
-                                <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
-                                <li><a href="#" class="pinterest"><i class="fa fa-pinterest"></i></a></li>
+                                <li><a href="https://www.facebook.com/van.cars.79" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://twitter.com/vancars2" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="https://www.instagram.com/van.cars.79/" class="instagram"><i class="fa fa-instagram"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -187,7 +210,7 @@
                             <p>הירשם לקבלת עדכונים והצעות ותהיה מעודכן לפני כולם</p>
                             <form action="#">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" placeholder="הירשם וקבל זיכוי של 100  ש''ח בחשבונך" />
+                                    <input class="form-control" type="text" placeholder="אימייל" />
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-theme btn-theme-transparent">הירשם</button>
@@ -230,4 +253,6 @@
             </div>
         </div>
     </footer>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOSTqosjeMwxqRawLoThqpF0HGv4Pc4AA&callback=initMap" async defer></script>
+
 </asp:Content>

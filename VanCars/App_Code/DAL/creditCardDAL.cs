@@ -6,6 +6,7 @@ using Glob;
 using VanCars;
 using System.Data;
 using Data;
+using System.Configuration;
 
 namespace VanCars.App_Code.DAL
 {
@@ -21,7 +22,7 @@ namespace VanCars.App_Code.DAL
 
         public string addCard()
         {
-            this.number = GlobFuncs.EncryptString(this.number, "b1bbc4ca589133e2e8a4e4a2315a1916");
+            this.number = GlobFuncs.EncryptString(this.number,ConfigurationManager.AppSettings["encriptionKey"] );
             DataBase db = new DataBase();
             string sql = "insert into CreditCardsTable(id,Number,month,year,DigitNo,OwnerId,CustomerId) " +
                 "values ('" + this.id + "','" + this.number + "','" + this.month + "','" + this.year + "','" + this.digitNo + "','" + this.ownerId + "'," + this.customerId + ")";
@@ -52,7 +53,7 @@ namespace VanCars.App_Code.DAL
                     cardsList.Add(cardItem = new creditCardDAL()
                     {
                         id = dt.Rows[i]["id"].ToString(),
-                        number = GlobFuncs.decription(dt.Rows[i]["Number"].ToString(), "b1bbc4ca589133e2e8a4e4a2315a1916"),
+                        number = GlobFuncs.decription(dt.Rows[i]["Number"].ToString(), ConfigurationManager.AppSettings["encriptionKey"]),
                         month = dt.Rows[i]["month"].ToString(),
                         year = dt.Rows[i]["year"].ToString(),
                         digitNo = dt.Rows[i]["DigitNo"].ToString(),
@@ -66,7 +67,7 @@ namespace VanCars.App_Code.DAL
         }
         public int updateCard()
         {
-            this.number = GlobFuncs.EncryptString(this.number, "b1bbc4ca589133e2e8a4e4a2315a1916");
+            this.number = GlobFuncs.EncryptString(this.number, ConfigurationManager.AppSettings["encriptionKey"]);
             string sql = "update CreditCardsTable set Number = '" + this.number + "',month =  '" + this.month + "', year = '" + this.year + "', DigitNo = '" + this.digitNo + "' where id = '" + this.id + "'";
             DataBase db = new DataBase();
             return db.ExecuteNonQuery(sql);
@@ -92,7 +93,7 @@ namespace VanCars.App_Code.DAL
             {
                 DataRow row = dataTable.Rows[0];
                 this.id = row["id"].ToString();
-                this.number = GlobFuncs.decription( row["number"].ToString(), "b1bbc4ca589133e2e8a4e4a2315a1916");
+                this.number = GlobFuncs.decription( row["number"].ToString(), ConfigurationManager.AppSettings["encriptionKey"]);
                 this.month = row["month"].ToString();
                 this.year = row["year"].ToString();
                 this.digitNo = row["digitNo"].ToString();

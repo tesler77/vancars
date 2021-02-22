@@ -30,6 +30,15 @@ namespace WebApplication2
         protected void getJson()
         {
             searchBLL search = (searchBLL)Session["search"];
+            string id = Request["search"];
+            if(id != null)
+            {
+                search = GlobFuncs.getSearchById(int.Parse(id));
+            }
+            if(search == null)
+            {
+                Response.Redirect("search.aspx");
+            }
             if (search.PickupDate.Contains("/"))
             {
                 search.PickupDate = search.PickupDate.Substring(0, 10);
@@ -61,24 +70,25 @@ namespace WebApplication2
             DdlReturnLocation.SelectedValue = search.ReturnLocarion;
             string date = search.PickupDate + " - " + search.ReturnDate;
             ReturnDate.Text = date.Substring(5, 2) + "/" + date.Substring(8, 2) + "/" + date.Substring(0, 4) + " - " + date.Substring(18, 2) + "/" + date.Substring(21, 2) + "/" + date.Substring(13, 4);
+            if (ret.Length < 20)
+            {
+                showErrorMwssage(2009);
+            }
         }
 
         protected void BtnSearch_Click(object sender, EventArgs e)
         {
             if (DdlPickupLocation.SelectedValue == "-1")
             {
-                CreateAlert("נא הזן סניף לקיחת רכב");
-                DdlPickupLocation.Focus();
+                showErrorMwssage(2006);
             }
             else if (DdlReturnLocation.SelectedValue == "-1")
             {
-                CreateAlert("נא הזן סניף החזרת רכב");
-                DdlReturnLocation.Focus();
+                showErrorMwssage(2007);
             }
             else if (ReturnDate.Text.Length <= 10)
             {
-                CreateAlert("נא הזן תאריך החזרת רכב");
-                ReturnDate.Focus();
+                showErrorMwssage(2008);
             }
             else
             {
@@ -87,9 +97,10 @@ namespace WebApplication2
                 Response.Redirect("results.aspx");
             }
         }
-        private void CreateAlert(string text)
+
+        private void showErrorMwssage(int id)
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alert", "alert('" + text + "')", true);
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "messgae", "showModalMessage('" + GlobFuncs.getErrorText(id) + "')", true);
         }
     }
 }

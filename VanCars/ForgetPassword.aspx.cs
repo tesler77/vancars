@@ -33,7 +33,7 @@ namespace VanCars
                 LtlMsg.Visible = true;
                 BtnGo.Visible = true;
                 //GlobFuncs.SendEmail(TxtForget.Text.ToString(), "שחזור סיסמה ממערכת VanCar", "הקוד הזמני הוא: " + TimingPass.ToString());
-                GlobFuncs.SendEmail(TxtForget.Text.ToString(), "שחזור סיסמה ממערכת VanCar", "<h1>התקבלה בקשה לשחזור סיסמתך במערכת vancars</h1> <h3>הקוד לשחזור הסיסמה הוא:"+ TimingPass.ToString() + "</h3>");
+                GlobFuncs.SendEmail(TxtForget.Text.ToString(), "שחזור סיסמה ממערכת VanCar", "<div style=\"text-align:center\"><h1>התקבלה בקשה לשחזור סיסמתך במערכת vancars</h1><h3>הקוד לשחזור הסיסמה הוא:" + TimingPass.ToString() + "</h3></div>");
             }
         }
 
@@ -72,8 +72,8 @@ namespace VanCars
                 if(b == true)
                 {
                     person per = new person();
-                    Session["Person"] = per;
-                    Response.Redirect("PrivatArea.aspx");
+                    per = (person)Session["Person"];
+                    Response.Redirect("PrivateArea.aspx");
                 }
                 else
                 {
@@ -82,5 +82,6 @@ namespace VanCars
             }
             
         }
+
     }
 }

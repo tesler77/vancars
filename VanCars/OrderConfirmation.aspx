@@ -52,19 +52,19 @@
                             </div>
                             <div class="media">
                                 <div class="media-body">
-                                    Phasellus pellentesque purus in massa aenean in pede phasellus libero ac tellus pellentesque semper.
+                                    אנו עומדים לרשותכם עבור כל תקלה או בעיה במענה טלפוני 24 שעות או במייל
                                 </div>
                             </div>
                             <div class="media">
                                 <div class="media-body">
-                                    <strong>Customer Service:</strong><br />
-                                    <a href="mailto:hello@rentit.com">hello@rentit.com</a>
+                                    <strong>תמיכה:</strong><br />
+                                    <a href="mailto:support@vancar.com">hello@rentit.com</a>
                                 </div>
                             </div>
                             <div class="media">
                                 <div class="media-body">
-                                    <strong>Returns and Refunds:</strong><br>
-                                    <a href="mailto:hello@rentit.com">hello@rentit.com</a>
+                                    <strong>שרות לקוחות:</strong><br>
+                                    <a href="mailto:service@vancar.com">hello@rentit.com</a>
                                 </div>
                             </div>
                         </div>
@@ -163,7 +163,13 @@
     <asp:Literal ID="Order" runat="server"></asp:Literal>
     <script>
         $(document).ready(function () {
-            $("#header").text('היי ' + $("#NameInServer").text() + ' הזמנתך בוצעה בהצלחה. מספר ההזמנה הוא ' + $("#OrderInServer").text())
+            let paramSearch = new URLSearchParams(window.location.search);
+            let parameter = paramSearch.get('id');
+            if (parameter == null) {
+                $("#header").text('היי ' + $("#NameInServer").text() + ' הזמנתך בוצעה בהצלחה. מספר ההזמנה הוא ' + $("#OrderInServer").text())
+            } else {
+                $("#header").text('היי ' + $("#NameInServer").text() + ' הזמנתך מספר ' + $("#OrderInServer").text() +'שונתה בהצלחה ' )
+            }
             fullData();
         })
         var c;

@@ -26,8 +26,10 @@ namespace VanCars.App_Code
 
         public int addMessage()
         {
+            int status;
+            status = (customersMessage == 1 ? 1 : 2);
             DataBase db = new DataBase();
-            string sql = "insert into chathTable (customerId,orderId,customersMessage,messageText) values (" + this.customerId + "," + this.orderId + "," + this.customersMessage + ",'" + this.messageText + "')";
+            string sql = "insert into chathTable (customerId,orderId,customersMessage,messageText,messageStatus) values (" + this.customerId + "," + this.orderId + "," + this.customersMessage + ",'" + this.messageText + "',"+status+")";
             int ret = db.ExecuteNonQuery(sql);
             if(ret > 0)
             {
@@ -35,6 +37,14 @@ namespace VanCars.App_Code
             }
             this.id = ret;
             return ret;
+        }
+
+        public int chatTakenCare()
+        {
+            DataBase db = new DataBase();
+            string sql = "update chathTable set messageStatus = 3 where customerId = " + this.customerId + " and orderId = " + this.orderId;
+            return db.ExecuteNonQuery(sql);
+            
         }
     }
 }

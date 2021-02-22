@@ -95,7 +95,7 @@ namespace WebApplication2
                 }
                 else if (TxtEmail.Text.Length == 0)
                 {
-                    TxtDateOfBirth.Focus();
+                    TxtEmail.Focus();
                     showErrorMwssage(14);
                 }
                 else if (TxtPass.Text.Length == 0)
@@ -115,7 +115,8 @@ namespace WebApplication2
                     person per = new person();
                     per = Us.RegUser();
                     sendRegMessage(per.CustomId, 0.ToString(), per.FullName);
-
+                    Session["Person"] = per;
+                    Response.Redirect("PrivateArea.aspx");
                 }
             }
         }
@@ -173,6 +174,54 @@ namespace WebApplication2
         private void showErrorMwssage(int id)
         {
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "messgae", "showModalMessage('" + GlobFuncs.getErrorText(id) + "')", true);
+        }
+
+        private void checkValues()
+        {
+            bool emailCheck = checkValiditEmail(TxtEmail.Text);
+            if (emailCheck == false)
+            {
+                TxtEmail.Focus();
+                showErrorMwssage(3010);
+                return;
+            }
+            if (TxtPhone.Text.Length < 9 || TxtPhone.Text.Length > 11)
+            {
+                TxtPhone.Focus();
+                showErrorMwssage(3011);
+                return;
+            }
+            string m_PERID = TxtId.Text;
+            char[] digits = m_PERID.PadLeft(9, '0').ToCharArray();
+            int[] oneTwo = { 1, 2, 1, 2, 1, 2, 1, 2, 1 };
+            int[] multiply = new int[9];
+            int[] oneDigit = new int[9];
+            for (int i = 0; i < 9; i++)
+                multiply[i] = Convert.ToInt32(digits[i].ToString()) * oneTwo[i];
+            for (int i = 0; i < 9; i++)
+                oneDigit[i] = (int)(multiply[i] / 10) + multiply[i] % 10;
+            int sum = 0;
+            for (int i = 0; i < 9; i++)
+                sum += oneDigit[i];
+            if (sum % 10 != 0)
+            {
+                showErrorMwssage(3012);
+                TxtId.Focus();
+                return;
+            }
+        }
+
+        private bool checkValiditEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
     }

@@ -14,6 +14,12 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <style>
+        .caption-text{
+            padding-right:20px;
+            padding-bottom:5px;
+        }
+    </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -104,68 +110,55 @@
                                     </div>
                                 </div>
                                 <br />
-                                <div class="row row-submit">
-                                    <div class="container-fluid">
-                                        <div class="col-md-12">
-                                            <div class="inner">
-                                                <asp:Button ID="BtnSearch" CssClass="btn btn-theme btn-block btn-theme-dark" Style="max-width: 658px;" runat="server" Text="חפש" OnClick="BtnSearch_Click" />
+                                <asp:UpdatePanel ID="updatePanel" runat="server">
+                                    <ContentTemplate>
+
+                                        <div class="row row-submit">
+                                            <div class="container-fluid">
+                                                <div class="col-md-12">
+                                                    <div class="inner">
+                                                        <asp:Button ID="BtnSearch" CssClass="btn btn-theme btn-block btn-theme-dark" Style="max-width: 658px;" runat="server" Text="חפש" OnClick="BtnSearch_Click" />
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
 
                             </div>
                         </div>
                         <br />
                         <div class="well">
                             <fieldset id="genre_criteria">
-                                <legend>Genre</legend>
+                                <legend>חברה</legend>
                                 <label>
-                                    <span>All</span>
-                                    <input type="checkbox" value="All" id="all_genre" onchange="check()" checked="checked"/>
+                                    <span>סמן הכל</span>
+                                    <input type="checkbox" value="All" id="all_genre" onchange="check()" checked="checked" />
                                 </label>
                                 <div>
                                     <label>
-                                        <span>hertz</span>
+                                        <span>הרץ</span>
                                         <input type="checkbox" id="hertz" value="3" onchange="check()" />
                                     </label>
                                 </div>
                                 <div>
                                     <label>
-                                        <span>albar</span>
+                                        <span>אלבר</span>
                                         <input type="checkbox" id="albar" value="4" onchange="check()" />
                                     </label>
                                 </div>
                                 <div>
                                     <label>
-                                        <span>trifty</span>
+                                        <span>טריפטי</span>
                                         <input type="checkbox" id="trifty" value="trifty" />
                                     </label>
                                 </div>
                                 <div>
                                     <label>
-                                        <span>shlomo sixst </span>
-                                        <input type="checkbox" id="shlomo_sixst"value="shlomo sixst">
+                                        <span>שלמה סיקסט</span>
+                                        <input type="checkbox" id="shlomo_sixst" value="shlomo sixst">
                                     </label>
-                                </div>
-                                <div>
-                                    <label>
-                                        <span>Western </span>
-                                        <input type="checkbox" id="Western" value="Western">
-                                    </label>
-                                </div>
-                                <div>
-                                    <label>
-                                        <span>Action </span>
-                                        <input type="checkbox" id="Action" value="Action">
-                                    </label>
-                                </div>
-                                <div>
-                                    <label>
-                                        <span>Biography </span>
-                                        <input type="checkbox" id="Biography" value="Biography"/>
-                                    </label>
-                                </div>
+                                </div>                             
                             </fieldset>
                         </div>
                     </div>
@@ -175,6 +168,19 @@
         </section>
     </div>
     <asp:Literal ID="LtlMsg" runat="server"></asp:Literal>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="top: 35%">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle"></h5>
+                </div>
+                <div class="modal-body" style="text-align: center">
+                    <div id="messageBody"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="button" id="aaa" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="visibility: hidden" />
     <script id="genre_template" type="text/html">
         <div class="checkbox">
             <label>
@@ -182,6 +188,7 @@
                 <^= genre^>
             </label>
         </div>
+
     </script>
     <script>
 
@@ -199,7 +206,17 @@
         $(document).ready(() => {
             let retDate = document.getElementById('<%= ReturnDate.ClientID %>').value
             $("#returnda").val(retDate);
+            if (count == 0) {
+                showModalMessage('אירעה שגיאה - נא נסה שנית במועד מאוחר יותר','שגיאה');
+            }
         })
+
+        function showModalMessage(content, type)
+        {
+            $("#modalTitle").html(type);
+            $("#messageBody").html(content)
+            $("#aaa").trigger("click");
+        } 
 
         let year_filter = document.getElementById('year_filter');
         year_filter.addEventListener('click', (event) => { check() });
@@ -217,15 +234,26 @@
                     if (document.getElementById('all_genre').checked == true) {
                         filler += "<div class='thumbnail no-border no-padding thumbnail-car-card clearfix' id=" + cars[i].id + ">";
                         filler += "<div class='media'>";
-                        filler += "<a class='media-link' data-gal='prettyPhoto' href='data/pics/" + cars[i].PicName + "'style='height:130px; width:250px'>";
-                        filler += "<img src='data/pics/" + cars[i].PicName + "' alt='' style='height:130px; width:250px''/>";
+                       // let image = "'" + cars[i].picture + "'";
+                        let image = cars[i].picture;
+                        if (image != null) {
+                            image = image.replace(/\//g, '|')
+                        }
+                        filler += '<a class="media-link"  href="#" onclick="abcd(\'' + image + '\')" style="height:130px; width:250px">';
+                        filler += "<img src='data:image/png;base64," + cars[i].picture + "' alt='' style='height:130px; width:250px''/>";
                         filler += "<span class='icon-view'><strong><i class='fa fa-eye'></i></strong></span></a></div><div class='caption'><div class='rating'>";
-                        filler += "<span class='star'></span><span class='star active'></span><span class='star active'></span><span class='star active'></span><span class='star active'></span></div>";
-                        filler += "<h4 class='caption-title'>" + cars[i].CarName + "</h4>";
+                        for (j = 0; j < 5; j++) {
+                            if (j < cars[i].carRating) {
+                                filler += "<span class='star active'></span>"
+                            } else {
+                                filler += "<span class='star'></span>"
+                            }
+                        }
+                        filler += "</div><h4 class='caption-title'>" + cars[i].CarName + "</h4>";
                         filler += "<h5 class='caption-title-sub'>" + cars[i].PriceOfDay + "ש''ח ליום </h5>";
-                        filler += "<div class'caption-text'>aaaaadsaffffffffffffffffffffffffffffffffffffffffffffffff dfffffffffffffgdfgdfgdfgfdgdfgfffffffffffffffffffaaaaa</div>";
+                        filler += "<div class'caption-text' style='padding-right: 20px;padding-bottom: 10px;'>        המחיר הוא ל-24 שעות, איחור בהחזרת הרכב יגרור תשלום נוסף</div>";
                         filler += "<table class='table'><tr>";
-                        filler += "<td><i class='fa fa-car'></i>" + cars[i].year + "</td>";
+                        filler += "<td><i class='fa fa-car'></i>" + cars[i].Seats + "</td>";
                         filler += "<td><i class='fa fa-dashboard'></i>" + cars[i].GearBox + "</td>";
                         filler += "<td><i class='fa fa-cog'></i>" + cars[i].EngineCapacity + "</td>";
                         filler += "<td><i class='fa fa-road'></i>" + GetCompanyName(cars[i].Company) + "</td>";
@@ -233,19 +261,29 @@
                         filler += "</tr></table></div></div>";
                         count++;
                     } else {
-                        for (let j = 0; j < companyChckbox.length;j++) {
+                        for (let j = 0; j < companyChckbox.length; j++) {
                             if (document.getElementById(companyChckbox[j]).checked == true && cars[i].Company == document.getElementById(companyChckbox[j]).value) {
                                 filler += "<div class='thumbnail no-border no-padding thumbnail-car-card clearfix' id=" + cars[i].id + ">";
                                 filler += "<div class='media'>";
-                                filler += "<a class='media-link' data-gal='prettyPhoto' href='data/pics/" + cars[i].PicName + "'style='height:130px; width:250px'>";
-                                filler += "<img src='data/pics/" + cars[i].PicName + "' alt='' style='height:130px; width:250px''/>";
+                                let image = cars[i].picture;
+                                if (image != null) {
+                                    image = image.replace(/\//g, '|')
+                                }
+                                filler += '<a class="media-link"  href="#" onclick="abcd(\'' + image + '\')" style="height:130px; width:250px">';
+                                filler += "<img src='data:image/png;base64," + cars[i].picture + "' alt='' style='height:130px; width:250px''/>";
                                 filler += "<span class='icon-view'><strong><i class='fa fa-eye'></i></strong></span></a></div><div class='caption'><div class='rating'>";
-                                filler += "<span class='star'></span><span class='star active'></span><span class='star active'></span><span class='star active'></span><span class='star active'></span></div>";
-                                filler += "<h4 class='caption-title'>" + cars[i].CarName + "</h4>";
+                                for (j = 0; j < 5; j++) {
+                                    if (j < cars[i].carRating) {
+                                        filler += "<span class='star active'></span>"
+                                    } else {
+                                        filler += "<span class='star'></span>"
+                                    }
+                                }   
+                                filler += "</div><h4 class='caption-title'>" + cars[i].CarName + "</h4>";
                                 filler += "<h5 class='caption-title-sub'>" + cars[i].PriceOfDay + "ש''ח ליום </h5>";
-                                filler += "<div class'caption-text'>aaaaadsaffffffffffffffffffffffffffffffffffffffffffffffff dfffffffffffffgdfgdfgdfgfdgdfgfffffffffffffffffffaaaaa</div>";
+                                filler += "<div class'caption-text' style='padding-right: 20px;padding-bottom: 10px;'>        המחיר הוא ל-24 שעות, איחור בהחזרת הרכב יגרור תשלום נוסף</div>";
                                 filler += "<table class='table'><tr>";
-                                filler += "<td><i class='fa fa-car'></i>" + cars[i].year + "</td>";
+                                filler += "<td><i class='fa fa-car'></i>" + cars[i].Seats + "</td>";
                                 filler += "<td><i class='fa fa-dashboard'></i>" + cars[i].GearBox + "</td>";
                                 filler += "<td><i class='fa fa-cog'></i>" + cars[i].EngineCapacity + "</td>";
                                 filler += "<td><i class='fa fa-road'></i>" + GetCompanyName(cars[i].Company) + "</td>";
@@ -263,7 +301,7 @@
             return " " + LowValEngine + " - " + UpValEngine + " ";
         }
 
-        let companyChckbox = ['all_genre', 'hertz', 'albar', 'trifty', 'shlomo_sixst', 'Western', 'Action', 'Biography'];
+        let companyChckbox = ['all_genre', 'hertz', 'albar', 'trifty', 'shlomo_sixst'];
 
         function GetCompanyName(id) {
             for (var i = 0; i < companys.length; i++) {
@@ -272,6 +310,15 @@
                 }
             }
             return "כללי"
+        }
+
+        function abcd(inin) {
+            let img = $('<img></img>');
+            let input = inin.replace(/\|/g, '\/');
+            img.attr('src', 'data:image/png;base64,' + input);
+            img.height(250);
+            img.width(480);
+            showModalMessage(img,'')
         }
 
         $("#rating_slider").slider({
@@ -311,6 +358,18 @@
             $('#genre_criteria :checkbox').prop('checked', $(this).is(':checked'));
             check();
         });
+
+        $(document).ready(() => {
+            $("#ContentPlaceHolder1_ReturnDate").hover((event) => {
+                let val = $("#returnda").val()
+                changeDate(val)
+            })
+        })
+
+        document.getElementById("ContentPlaceHolder1_BtnSearch").addEventListener("mouseover", (event) => {
+            let val = $("#returnda").val()
+            changeDate(val)
+        })
 
     </script>
 

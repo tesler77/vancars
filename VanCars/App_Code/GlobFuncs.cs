@@ -12,6 +12,8 @@ using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
+using System.Configuration;
+using System.Dynamic;
 
 namespace Glob
 {
@@ -73,7 +75,6 @@ namespace Glob
         {
             try
             {
-
                 MailMessage mail = new MailMessage();
                 mail.From = new System.Net.Mail.MailAddress("pa8501100@gmail.com");
                 SmtpClient smtp = new SmtpClient();
@@ -152,7 +153,7 @@ namespace Glob
             foreach (DataRow row in dt.Rows)
             {
                 string number = row["Number"].ToString();
-                number = decription(number, "b1bbc4ca589133e2e8a4e4a2315a1916");                    
+                number = decription(number, ConfigurationManager.AppSettings["encriptionKey"]);                    
                 number = number.Substring(number.Length - 5, 4);
                 number = number + " - ****";
                 row["Number"] = number;
@@ -286,7 +287,7 @@ namespace Glob
             DataBase db = new DataBase();
             DataTable dt,dt1 = new DataTable();
             dt1 = JsonConvert.DeserializeObject<DataTable>(GetCompanyList());
-            string sql = "select * from OrderTable where CustomId = " + customerId;
+            string sql = "select * from FullOrdersDataView where CustomId = " + customerId;
             dt = db.ExecuteReader(sql);
             var CompanyName = "a";
             order or = new order();
@@ -303,6 +304,7 @@ namespace Glob
                 orderList.Add(or = new order((int)dr["rentId"],
                     (int)dr["CustomId"], dr["ExternalRentId"].ToString(),
                     dr["CarName"].ToString(),
+                    (int)dr["CarId"],
                     (int)dr["CarLevel"],
                     CompanyName.ToString(),
                     //dr["CompanyId"].ToString(),
@@ -318,7 +320,7 @@ namespace Glob
                     dr["ReturnBranchText"].ToString(),
                     dr["ReturnDate"].ToString(), 
                     dr["DateOrder"].ToString(),
-                    dr["Status"].ToString()));
+                    dr["statusName"].ToString()));
             }
             return orderList;
         }
@@ -326,7 +328,7 @@ namespace Glob
         {
             DataBase db = new DataBase();
             DataTable dt = new DataTable();
-            string sql = "select * from OrderTable where CustomId = " + customerId;
+            string sql = "select * from FullOrdersDataView where CustomId = " + customerId;
             dt = db.ExecuteReader(sql);
             return JsonConvert.SerializeObject(dt);
         }
@@ -336,6 +338,13 @@ namespace Glob
             DataBase db = new DataBase();
             return db.ExecuteScalar(sql);
 
+        }
+
+        public static string getComanyIdByName(string company)
+        {
+            string sql = "select CompanyId from CompanysTable where CompanyName = '" + company+"'";
+            DataBase db = new DataBase();
+            return db.ExecuteScalar(sql);
         }
 
     }

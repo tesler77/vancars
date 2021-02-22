@@ -220,13 +220,13 @@ namespace VanCars {
         protected global::System.Web.UI.WebControls.TextBox txtOwnerId;
         
         /// <summary>
-        /// addCreditCard control.
+        /// UpdatePanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button addCreditCard;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel;
         
         /// <summary>
         /// ltlNo control.

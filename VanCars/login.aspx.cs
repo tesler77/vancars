@@ -40,16 +40,20 @@ namespace VanCars
                     Response.Redirect("PrivateArea.aspx");
 
                 }
-                else if (persn.CustomId == -2) { LtlMsg.Text = "<script> alert('סיסמה שגויה')</script>"; }
-                else if (persn.CustomId == -3) { LtlMsg.Text = "<script> alert('שם משתמש שגוי')</script>"; }
-                else { LtlMsg.Text = "<script> alert('לקוח חסום - נא לפנות לתמיכה')</script>"; }
+                else if (persn.CustomId == -2) { showErrorMwssage(1);  }
+                else if (persn.CustomId == -3) { showErrorMwssage(2); }
+                else { showErrorMwssage(3); }
             }
             else
             {
-                LtlMsg.Text = "<script> alert('הזנת סיסמה שגויה /n נא נסה שוב')</script>";
-                TextBox2.Focus();
+                showErrorMwssage(1);
             }
 
+        }
+
+        private void showErrorMwssage(int id)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "messgae", "showModalMessage('" + GlobFuncs.getErrorText(id) + "')", true);
         }
     }
 }

@@ -22,7 +22,21 @@ namespace WebApplication2
                     Users users = new Users(per.CustomId);
                     guest.InnerHtml = "שלום " + per.FullName +" "+ users.getUserRole();
                 }
+            
             }
+
+        }
+
+        protected void disconnectClick(object sender, EventArgs e)
+        {
+            Session["Person"] = null;
+            guest.InnerHtml = "שלום אורח";
+            Response.Redirect("reg.aspx");
+
+        }
+
+        protected void dis_Click(object sender, EventArgs e)
+        {
 
         }
     }

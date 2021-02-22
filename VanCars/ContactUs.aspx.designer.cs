@@ -13,6 +13,15 @@ namespace VanCars {
     public partial class WebForm1 {
         
         /// <summary>
+        /// scriptManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager scriptManager;
+        
+        /// <summary>
         /// TxtName control.
         /// </summary>
         /// <remarks>
@@ -49,6 +58,15 @@ namespace VanCars {
         protected global::System.Web.UI.WebControls.TextBox TxtMsg;
         
         /// <summary>
+        /// updatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanel;
+        
+        /// <summary>
         /// BtnSend control.
         /// </summary>
         /// <remarks>
@@ -56,14 +74,5 @@ namespace VanCars {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnSend;
-        
-        /// <summary>
-        /// ltlJs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltlJs;
     }
 }

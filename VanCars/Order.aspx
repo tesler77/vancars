@@ -8,6 +8,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:ScriptManager ID="ScriptManager" runat="server"></asp:ScriptManager>
     <style>
         .car-big-card .car-details .price strong {
             font-size: 30px;
@@ -32,13 +33,13 @@
 
         <!-- BREADCRUMBS -->
         <section class="page-section breadcrumbs text-left">
-            <div class="container">
+            <div class="container" style="text-align: right">
                 <div class="page-header">
-                    <h1>Car Booking</h1>
+                    <h1>מעבר על ההזמנה</h1>
                 </div>
                 <ul class="breadcrumb">
                     <li><a href="search.aspx">בית</a></li>
-                    <li><a href="#">Pages</a></li>
+                    <li><a href="results.aspx">תוצאות חיפוש</a></li>
                     <li class="active">הזמנה ותשלום</li>
                 </ul>
             </div>
@@ -56,46 +57,7 @@
                         <div class="car-big-card alt">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <div class="owl-carousel img-carousel">
-                                        <div class="item">
-                                            <a class="btn btn-zoom" href="data/pics/yunday_i25.png" data-gal="prettyPhoto"><i class="fa fa-arrows-h"></i></a>
-                                            <a href="data/pics/yunday_i25.png" data-gal="prettyPhoto">
-                                                <img class="img-responsive" src="data/pics/yunday_i25.png" alt="" /></a>
-                                        </div>
-                                        <div class="item">
-                                            <a class="btn btn-zoom" href="data/pics/car-600x426x1.jpg" data-gal="prettyPhoto"><i class="fa fa-arrows-h"></i></a>
-                                            <a href="data/pics/car-600x426x1.jpg" data-gal="prettyPhoto">
-                                                <img class="img-responsive" src="data/pics/car-600x426x1.jpg" alt="" /></a>
-                                        </div>
-                                        <div class="item">
-                                            <a class="btn btn-zoom" href="data/pics/car-600x426x1.jpg" data-gal="prettyPhoto"><i class="fa fa-arrows-h"></i></a>
-                                            <a href="data/pics/car-600x426x1.jpg" data-gal="prettyPhoto">
-                                                <img class="img-responsive" src="data/pics/car-600x426x1.jpg" alt="" /></a>
-                                        </div>
-                                        <div class="item">
-                                            <a class="btn btn-zoom" href="data/pics/car-600x426x1.jpg" data-gal="prettyPhoto"><i class="fa fa-arrows-h"></i></a>
-                                            <a href="data/pics/car-600x426x1.jpg" data-gal="prettyPhoto">
-                                                <img class="img-responsive" src="data/pics/car-600x426x1.jpg" alt="" /></a>
-                                        </div>
-                                    </div>
-                                    <div class="row car-thumbnails">
-                                        <div class="col-xs-3 col-sm-3 col-md-3">
-                                            <a href="#" onclick="jQuery('.img-carousel').trigger('to.owl.carousel', [0,300]);">
-                                                <img src="data/pics/car-70x70x1.jpg" alt="" /></a>
-                                        </div>
-                                        <div class="col-xs-3 col-sm-3 col-md-3">
-                                            <a href="#" onclick="jQuery('.img-carousel').trigger('to.owl.carousel', [1,300]);">
-                                                <img src="data/pics/car-70x70x1.jpg" alt="" /></a>
-                                        </div>
-                                        <div class="col-xs-3 col-sm-3 col-md-3">
-                                            <a href="#" onclick="jQuery('.img-carousel').trigger('to.owl.carousel', [2,300]);">
-                                                <img src="data/pics/car-70x70x1.jpg" alt="" /></a>
-                                        </div>
-                                        <div class="col-xs-3 col-sm-3 col-md-3">
-                                            <a href="#" onclick="jQuery('.img-carousel').trigger('to.owl.carousel', [3,300]);">
-                                                <img src="data/pics/car-70x70x1.jpg" alt="" /></a>
-                                        </div>
-                                    </div>
+                                    <img id="imageCarusel" class="img-responsive" alt="" style="height: 320px; width: 600px; margin-top: inherit" />
                                 </div>
                                 <div class="col-md-4">
                                     <div class="car-details">
@@ -114,7 +76,7 @@
                                             </ul>
                                         </div>
                                         <div class="price text-center">
-                                            <strong id="TotPrice"></strong></br><span id="day"></span> <i class="fa fa-info-circle"></i>
+                                            <strong id="TotPrice" runat="server"></strong></br><span id="day"></span> <i class="fa fa-info-circle"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -137,26 +99,6 @@
                                                 </div>
                                             </ItemTemplate>
                                         </asp:Repeater>
-                                        <%-- <div class="checkbox checkbox-danger">
-                                            <input id="checkboxl1" type="checkbox" onchange="aaa(this.id)" />
-                                            <label for="checkboxl1">כסא תינוק<span id="baby_seat" class="pull-left"></span></label>
-                                        </div>
-                                        <div class="checkbox checkbox-danger">
-                                            <input id="checkboxl2" type="checkbox" onchange="aaa(this.id)" />
-                                            <label for="checkboxl2">כסא בוסטר לילד   <span id="boster" class="pull-left"></span></label>
-                                        </div>
-                                        <div class="checkbox checkbox-danger">
-                                            <input id="checkboxl3" type="checkbox" onchange="aaa(this.id)" />
-                                            <label for="checkboxl3">מערכת ניווט <span id="nevigator" class="pull-left"></span></label>
-                                        </div>
-                                        <div class="checkbox checkbox-danger">
-                                            <input id="checkboxl4" type="checkbox" onchange="aaa(this.id)" />
-                                            <label for="checkboxl4">ביטול השתתפות עצמית<span id="addition_insure" class="pull-left"></span></label>
-                                        </div>
-                                        <div class="checkbox checkbox-danger">
-                                            <input id="checkboxl5" type="checkbox" onchange="aaa(this.id)" />
-                                            <label for="checkboxl5">נהג נוסף<span id="addition_driver" class="pull-left"></span></label>
-                                        </div>--%>
                                     </div>
                                 </div>
 
@@ -203,22 +145,22 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <asp:TextBox ID="TxtOrdName" runat="server" class="form-control" placeholder="שם פרטי ושם משפחה*"></asp:TextBox>
+                                    <asp:TextBox ID="TxtOrdName" runat="server" class="form-control" ReadOnly="true" placeholder="שם פרטי ושם משפחה"></asp:TextBox>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <asp:TextBox ID="TxtOrdEmail" runat="server" placeholder="כתובת אימייל*" class="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="TxtOrdEmail" runat="server" placeholder="כתובת אימייל" ReadOnly="true" class="form-control"></asp:TextBox>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+  <%--                          <div class="col-md-6">
                                 <div class="form-group">
                                     <asp:TextBox ID="TxtOrdTel" runat="server" placeholder="מספר טלפון" CssClass="form-control"></asp:TextBox>
                                 </div>
-                            </div>
+                            </div>--%>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <asp:TextBox ID="TxtOrdPhone" runat="server" placeholder="מספר נייד" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="TxtOrdPhone" runat="server" placeholder="מספר נייד" ReadOnly="true" CssClass="form-control"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -317,24 +259,29 @@
                         </div>
 
                         <h3 class="block-title alt"><i class="fa fa-angle-down"></i>לבקשה מיוחדת מהנציג בסניף</h3>
-                        <form action="#" class="form-additional">
+                        <%--<form action="#" class="form-additional">--%>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <textarea name="fad-message" id="fad-message" title="Addition information is required" class="form-control alt" placeholder="בקשה מיוחדת" cols="30" rows="10"></textarea>
+                                        <asp:TextBox TextMode="MultiLine" ID="txtNotes" runat="server" CssClass="form-control alt" placeholder="בקשה מיוחדת" Rows="10"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                      <%--</form>--%>
 
                         <div class="overflowed reservation-now">
                             <div class="checkbox pull-right">
                                 <input id="accept" type="checkbox" name="fd-name" title="Please accept" data-toggle="tooltip">
                                 <label for="accept">אני מסכים לכל התנאים של החברה</label>
                             </div>
-                            <asp:Button ID="BtnOrder" runat="server" OnClick="BtnOrder_Click" Height="0px" BorderWidth="0" />
-                            <button type="button" id="btnOrd" class="btn btn-theme pull-left">הזמן עכשיו</button>
-                            <asp:HiddenField runat="server" ID="hdnCard" Value="-1" />
+                            <asp:UpdatePanel ID="UpdatePanel" runat="server">
+                                <ContentTemplate>
+                                    <asp:Button ID="BtnOrder" runat="server" OnClick="BtnOrder_Click" Height="0px" BorderWidth="0" />
+                                    <button type="button" id="btnOrd" class="btn btn-theme pull-left">הזמן עכשיו</button>
+                                    <asp:HiddenField runat="server" ID="hdnCard" Value="-1" />
+                                    <asp:HiddenField runat="server" ID="hdnPrice" />
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </div>
 
                     </div>
@@ -394,10 +341,23 @@
                 </div>
             </div>
         </section>
-        <!-- /PAGE WITH SIDEBAR -->
+        <div id="gal"></div>        
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="top: 35%">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">שגיאה</h5>
+                    </div>
+                    <div class="modal-body" style="text-align: center">
+                        <div id="messageBody"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" id="bbb" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="visibility: hidden" />
 
         <asp:Literal runat="server" ID="ltlAlert"></asp:Literal>
-        <asp:HiddenField ID="ccc" runat="server" />
         <asp:HiddenField ID="hdnSelectedExt" runat="server" />
         <!-- /CONTENT AREA -->
         <script>
@@ -416,19 +376,43 @@
                 days = (retDate - pickDate) / (1000 * 60 * 60 * 24)
                 $("#day").html(" עבור " + days + " יום ")
                 tot = days * temp[0].PriceOfDay
-                $("#TotPrice").html("סה''כ " + tot + " ש''ח")
+                $("#ContentPlaceHolder1_TotPrice").html("סה''כ " + tot + " ש''ח")
+                $("#ContentPlaceHolder1_hdnPrice").val(tot)
                 $("#creditCards").html(FullyCreditCards())
                 $("#fromDate").html(search.PickupDate);
                 $("#toDate").html(search.ReturnDate);
                 getBranchData()
+                singCehckedExtension()
+                loadPic()
             })
+
+            function singCehckedExtension() {
+                let paramSearch = new URLSearchParams(window.location.search);
+                if (paramSearch.get('id') !== null) {
+                    $("#btnOrd").html('שמור שינויים');
+                    extInOrder.forEach((value, key) => {
+                        document.getElementById(value.ExtentionId).checked = true;
+                        aaa(value.ExtentionId);
+                    })
+                    let a = creditCardInOrder - 1;
+                    let crCard = document.getElementById(creditCardInOrder);
+                    if (crCard){
+                        crCard.checked = true;
+                    }
+                }
+            }
 
             function FullyCreditCards() {
                 var CardsString = "";
                 for (var i = 0; i < cards.length; i++) {
-                    CardsString += "<input type='radio' id=" + cards[i].id + " name='crd' value=" + cards[i].id + " /><span>" + cards[i].Number + "</span><br />"
+                    CardsString += "<input type='radio' id=" + cards[i].id + " name='crd' value=" + cards[i].id + " /><p style='margin-bottom: -15px;'>" + cards[i].Number + "</p><br />"
                 }
                 return CardsString
+            }
+
+            function showModalMessage(content) {
+                $("#messageBody").html(content)
+                $("#bbb").trigger("click");
             }
 
             function aaa(id) {
@@ -462,7 +446,9 @@
             function CalcTot(PriceForDay, Days) {
                 let temp = PriceForDay * Days;
                 tot = tot + temp;
-                $("#TotPrice").html("סה''כ " + tot + " ש''ח")
+                $("#ContentPlaceHolder1_TotPrice").html("סה''כ " + tot + " ש''ח")
+                $("#ContentPlaceHolder1_hdnPrice").val(tot)
+
             }
 
 
@@ -481,11 +467,12 @@
             };
             var selecteCard;
             document.getElementById('btnOrd').addEventListener('click', (event) => {
+                debugger;
                 if (document.getElementById('accept').checked == false) {
-                    alert('נא אשר את התנאים')
+                    showModalMessage('נא אשר את התנאים')
                 } else {
                     if (document.getElementById('existsCard').getAttribute('aria-expanded') == 'false' && document.getElementById('newCard').getAttribute('aria-expanded') == 'false') {
-                        alert('נא הזן או בחר כרטיס אשראי');
+                        showModalMessage('נא הזן או בחר כרטיס אשראי');
                     } else if (document.getElementById('existsCard').getAttribute('aria-expanded') == 'true') {
                         cards.forEach((value, key) => {
                             if (document.getElementById(value.id).checked == true) {
@@ -497,24 +484,30 @@
                             $("#ContentPlaceHolder1_hdnSelectedExt").val(JSON.stringify(selectedExtensions))
                             document.getElementById('ContentPlaceHolder1_BtnOrder').click();
                         } else {
-                            alert('נא בחר כרטיס אשראי')
+                            showModalMessage('נא בחר כרטיס אשראי')
                         }
 
                     } else {
                         if ($('#ContentPlaceHolder1_CompanyDdl').val() == '-1' || $('#ContentPlaceHolder1_TxtCard').val == '' || $('#ContentPlaceHolder1_monthDdl').val() == '-1' || $('#ContentPlaceHolder1_YearDdl').val() == '-1' || $('#ContentPlaceHolder1_TxtCvv').val() == '' || $('#ContentPlaceHolder1_TxtName').val() == '' || $('#ContentPlaceHolder1_TxtId').val() == '') {
-                            alert('נא הזן את כל השדות בכרטיס האשראי החדש')
+                            showModalMessage('נא הזן את כל השדות בכרטיס האשראי החדש')
                         } else {
                             $("#ContentPlaceHolder1_hdnSelectedExt").val(JSON.stringify(selectedExtensions))
                             document.getElementById('ContentPlaceHolder1_BtnOrder').click();
                         }
                     }
+
                 }
             })
+            function loadPic() {
+                var gal = document.getElementById('imageCarusel')
+                gal.setAttribute('src', 'data:image/png;base64,' + temp[0].picture)
+            }
 
 
         </script>
         <asp:Literal ID="LtlMsg1" runat="server"></asp:Literal>
         <asp:Literal ID="LtlMsg2" runat="server"></asp:Literal>
+        <asp:Literal ID="ltlExtInOrder" runat="server"></asp:Literal>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
     <asp:Literal ID="LtlMsg" runat="server"></asp:Literal>

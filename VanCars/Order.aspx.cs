@@ -10,6 +10,7 @@ using VanCars.App_Code;
 using Glob;
 using System.Data;
 using Newtonsoft.Json;
+using System.Configuration;
 using System.Collections.Specialized;
 
 namespace VanCars
@@ -20,16 +21,25 @@ namespace VanCars
         string Car;
         protected void Page_Load(object sender, EventArgs e)
         {
+            person per = new person();
+            per = (person)Session["person"];
             if (!IsPostBack)
             {
-                person per = new person();
-                per = (person)Session["person"];
                 if (per == null)
                 {
-                    Session["orderQuery"] = Request.RawUrl;
-                    Response.Redirect("login.aspx");
+                    if (Session["search"] != null)
+                    {
+                        Session["orderQuery"] = Request.RawUrl;
+                        Response.Redirect("login.aspx");
+                    }
                 }
-
+                if (Session["search"] == null)
+                {
+                    Response.Redirect("search.aspx");
+                }
+                TxtOrdEmail.Text = per.Email;
+                TxtOrdName.Text = per.FullName;
+                TxtOrdPhone.Text = per.PhoneNumber;
                 Company = (string)Request["Comapny"];
                 Car = (string)Request["CarId"];
                 string tot = GetOrder();
@@ -42,9 +52,9 @@ namespace VanCars
                 ext = ext.Substring(0, ext.Length - 1);
                 DataTable table = new DataTable();
                 table = JsonConvert.DeserializeObject<DataTable>(ext);
-                foreach(DataRow row in table.Rows)
+                foreach (DataRow row in table.Rows)
                 {
-                    extentions.Add(new Extention(int.Parse(row["id"].ToString()), row["description"].ToString(),int.Parse(row["Price"].ToString())));
+                    extentions.Add(new Extention(int.Parse(row["id"].ToString()), row["description"].ToString(), int.Parse(row["Price"].ToString())));
                 }
                 rptExt.DataSource = extentions;
                 rptExt.DataBind();
@@ -52,8 +62,18 @@ namespace VanCars
             }
             else
             {
-                Company = "4";
+                Company = (string)Request["Comapny"];
                 Car = (string)Request["CarId"];
+            }
+            if (Request["id"] != null)
+            {
+                BtnOrder.Text = "שמור שינויים";
+                double o = double.Parse(Request["id"]);
+                double orderId = o / 1825.8976;
+                DataTable orderDt = GlobFuncs.getOrderDataByOrderId(int.Parse(orderId.ToString()));
+                txtNotes.Text = orderDt.Rows[0]["notes"].ToString();
+                TxtOrdName.Text = per.FullName;
+                ltlExtInOrder.Text = "<script>var extInOrder =" + GlobFuncs.getExtByOrderId(orderId.ToString()) + "\n var creditCardInOrder = " + GlobFuncs.getCreditCardOfOrder(int.Parse(orderId.ToString())) + "</script>";
             }
         }
         private string GetTemplate(string Company, int id)
@@ -92,12 +112,11 @@ namespace VanCars
         {
             if (TxtOrdName.Text.Length < 1)
             {
-                ltlAlert.Text = "<script>alert('שם פרטי ושם משפחה הינו שדה חובה')</script>";
-                TxtOrdName.Focus();
+                showErrorMwssage(1003);
             }
             else if (TxtOrdEmail.Text.Length < 1)
             {
-                ltlAlert.Text = "<script>alert('כתובת אימייל הינו שדה חובה')</script>";
+                showErrorMwssage(1004);
             }
             else
             {
@@ -108,6 +127,7 @@ namespace VanCars
                     person = (person)Session["person"];
                     creaditCardBLL creaditCard = new creaditCardBLL()
                     {
+                        id = GlobFuncs.createCreditCardId(),
                         number = TxtCard.Text.ToString(),
                         month = monthDdl.SelectedValue.ToString(),
                         year = YearDdl.SelectedValue.ToString(),
@@ -122,8 +142,22 @@ namespace VanCars
                     cardId = hdnCard.Value;
                 }
                 Session["selectedExt"] = hdnSelectedExt.Value;
-                Response.Redirect("OrderConfirmation.aspx?Company=" + Company + "&CarId=" + Car+"&card="+cardId);
+                Session["totPrice"] = hdnPrice.Value;
+                Session["notes"] = txtNotes.Text;
+                if (BtnOrder.Text != "שמור שינויים")
+                {
+                    Response.Redirect("OrderConfirmation.aspx?Company=" + Company + "&CarId=" + Car + "&card=" + cardId);
+                }
+                else
+                {
+                    Response.Redirect("OrderConfirmation.aspx?Company=" + Company + "&CarId=" + Car + "&card=" + cardId + "&id=" + Request["id"]);
+                }
             }
+        }
+
+        private void showErrorMwssage(int id)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "messgae", "showModalMessage('" + GlobFuncs.getErrorText(id) + "')", true);
         }
     }
 }

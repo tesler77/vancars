@@ -12,7 +12,7 @@ namespace VanCars.App_Code
 {
     public static class GetApi
     {
-        public static string PostApi(string Query,string baseAddress)
+        public static string PostApi(string Query, string baseAddress)
         {
 
 
@@ -26,17 +26,24 @@ namespace VanCars.App_Code
             ASCIIEncoding encoding = new ASCIIEncoding();
             //Byte[] bytes = encoding.GetBytes(parsedContent);
             Byte[] bytes = Encoding.UTF8.GetBytes(parsedContent);
+            try
+            {
 
-            Stream newStream = http.GetRequestStream();
-            newStream.Write(bytes, 0, bytes.Length);
-            newStream.Close();
+                Stream newStream = http.GetRequestStream();
+                newStream.Write(bytes, 0, bytes.Length);
+                newStream.Close();
 
-            var response = http.GetResponse();
+                var response = http.GetResponse();
 
-            var stream = response.GetResponseStream();
-            var sr = new StreamReader(stream);
-            var content = sr.ReadToEnd();
-            return content;
+                var stream = response.GetResponseStream();
+                var sr = new StreamReader(stream);
+                var content = sr.ReadToEnd();
+                return content;
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
 
         }
         public static string Get(string url)
@@ -47,7 +54,7 @@ namespace VanCars.App_Code
         }
 
 
-            
+
 
     }
 }

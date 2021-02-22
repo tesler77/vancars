@@ -6,8 +6,9 @@ using SearchBLL;
 using VanCars.App_Code;
 using System.Net;
 using Newtonsoft.Json;
-
-
+using System.IO;
+using System.Data;
+using Glob;
 
 namespace searchDAL
 {
@@ -27,19 +28,28 @@ namespace searchDAL
             this.ReturnDate = ReturnDate;
 
         }
+
+
         public string GetCars()
         {
-            this.Company = "אלבר";
+            string result = "\"[";
             string json = JsonConvert.SerializeObject(this);
-            string a = GetApi.PostApi(json, "https://localhost:44361/api/CarsBLL");
-            a = a.Replace("}", ",\\\"Company\\\":4\\r\\n  }");
+            DataTable dt = new DataTable();
+            dt = GlobFuncs.getCarsApis();
+            foreach (DataRow row in dt.Rows)
+            {
+                string res = GetApi.PostApi(json, row["ApiAddress"].ToString() + "CarsBLL");
+                if (res.Length > 0)
+                {
+                    res = res.Replace("}", ",\\\"Company\\\":"+row["CompanyId"] +"\\r\\n  }");
+                    res = res.Substring(2, res.Length - 4) + ",";
+                    result = result + res;
+                }
 
-            
-            this.Company = "הרץ";
-            string b = GetApi.PostApi(json, "https://localhost:44365/api/CarsBLL");
-            b = b.Replace("}", ",\\\"Company\\\":3\\r\\n  }");
-            a = a.Substring(0, a.Length - 2) + "," + b.Substring(2,b.Length-2);
-            return a;
+            }
+            result = result.Substring(0, result.Length - 1);
+            result = result + "]\"";
+            return result;
         }
     }
 

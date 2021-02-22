@@ -13,6 +13,24 @@ namespace VanCars {
     public partial class Order {
         
         /// <summary>
+        /// ScriptManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager;
+        
+        /// <summary>
+        /// TotPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl TotPrice;
+        
+        /// <summary>
         /// rptExt control.
         /// </summary>
         /// <remarks>
@@ -38,15 +56,6 @@ namespace VanCars {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TxtOrdEmail;
-        
-        /// <summary>
-        /// TxtOrdTel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtOrdTel;
         
         /// <summary>
         /// TxtOrdPhone control.
@@ -121,6 +130,24 @@ namespace VanCars {
         protected global::System.Web.UI.WebControls.TextBox TxtId;
         
         /// <summary>
+        /// txtNotes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNotes;
+        
+        /// <summary>
+        /// UpdatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel;
+        
+        /// <summary>
         /// BtnOrder control.
         /// </summary>
         /// <remarks>
@@ -139,6 +166,15 @@ namespace VanCars {
         protected global::System.Web.UI.WebControls.HiddenField hdnCard;
         
         /// <summary>
+        /// hdnPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnPrice;
+        
+        /// <summary>
         /// ltlAlert control.
         /// </summary>
         /// <remarks>
@@ -146,15 +182,6 @@ namespace VanCars {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ltlAlert;
-        
-        /// <summary>
-        /// ccc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField ccc;
         
         /// <summary>
         /// hdnSelectedExt control.
@@ -182,6 +209,15 @@ namespace VanCars {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal LtlMsg2;
+        
+        /// <summary>
+        /// ltlExtInOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltlExtInOrder;
         
         /// <summary>
         /// LtlMsg control.

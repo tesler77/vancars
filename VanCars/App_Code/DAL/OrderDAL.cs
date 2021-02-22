@@ -17,6 +17,7 @@ namespace VanCars.App_Code.DAL
     public class OrderDAL
     {
         public int Company { get; set; }
+        public int totalPrice { get; set; }
         public int PickupBranch { get; set; }
         public int ReturnBranch { get; set; }
         public string PickupDate { get; set; }
@@ -26,10 +27,12 @@ namespace VanCars.App_Code.DAL
         public searchBLL Search { get; set; }
         public person person { get; set; }
         public creaditCardBLL CreditCard { get; set; }
+        public string notes { get; set; }
 
-        public OrderDAL(int company,  int pickupBranch, int returnBranch, DateTime pickupDate, DateTime returnDate, int carId, List<Extention> extetions, searchBLL search, person person, creaditCardBLL creaditCard)
+        public OrderDAL(int company,int totalPrice  ,int pickupBranch, int returnBranch, DateTime pickupDate, DateTime returnDate, int carId, List<Extention> extetions, searchBLL search, person person, creaditCardBLL creaditCard,string notes)
         {
             Company = company;
+            this.totalPrice = totalPrice;
             PickupBranch = pickupBranch;
             ReturnBranch = returnBranch;
             PickupDate = GetDate(pickupDate);
@@ -39,12 +42,13 @@ namespace VanCars.App_Code.DAL
             Search = search;
             this.person = person;
             this.CreditCard = creaditCard;
+            this.notes = notes;
         }
 
         public List<string> CreateExtOrder()
         {
             string external = GlobFuncs.convertExtensionToString(this.extetions);
-            ExtOrder ext = new ExtOrder(this.person.IdNumber,this.person.FullName,this.person.PhoneNumber,this.person.PhoneNumber,this.person.LiccensNumber,this.PickupBranch,this.ReturnBranch, this.PickupDate,this.ReturnDate,this.CarId,18,external,this.CreditCard.number,this.CreditCard.month,this.CreditCard.year,this.CreditCard.digitNo,this.CreditCard.ownerId);
+            ExtOrder ext = new ExtOrder(this.person.IdNumber,this.person.FullName,this.person.PhoneNumber,this.person.PhoneNumber,this.person.LiccensNumber,this.PickupBranch,this.ReturnBranch, this.PickupDate,this.ReturnDate,this.CarId,18,external,this.CreditCard.number,this.CreditCard.month,this.CreditCard.year,this.CreditCard.digitNo,this.CreditCard.ownerId,this.notes);
             string ApiAddress = GlobFuncs.GetApiAddress(this.Company, "OrderBll");
             string Json = JsonConvert.SerializeObject(ext);
             string a = GetApi.PostApi(Json, ApiAddress);
@@ -61,8 +65,8 @@ namespace VanCars.App_Code.DAL
                 string pickBr = GlobFuncs.GetBranchName(this.PickupBranch, this.Company);
                 string RetBr = GlobFuncs.GetBranchName(this.ReturnBranch,this.Company);
                 DataBase db = new DataBase();
-                string sql = "insert into OrderTable (CustomId,ExternalRentId,CarName,CarLevel,CompanyId,Seats,GearBox,EngineCapacity,Doors,Beags,PickupBranch,PickupBranchText,PickupDate,ReturnBranch,ReturnBranchText,ReturnDate,creditCardId,Status)values" +
-                    " ('" + this.person.CustomId + "','" + a + "','" + carDetails.CarName + "','" + carDetails.CarLevel + "','" + this.Company + "','" + carDetails.Seats + "','" + carDetails.GearBox + "','" + carDetails.EngineCapacity + "','" + carDetails.Doors + "','" + carDetails.Baegs + "','" + this.PickupBranch + "','"+pickBr+"','" + this.PickupDate + "','" + this.ReturnBranch + "','"+RetBr+"','" + this.ReturnDate + "','"+this.CreditCard.id+"','2')";
+                string sql = "insert into OrderTable (CustomId,ExternalRentId,totalPrice,CarName,CarId,CarLevel,CompanyId,Seats,GearBox,EngineCapacity,Doors,Beags,PickupBranch,PickupBranchText,PickupDate,ReturnBranch,ReturnBranchText,ReturnDate,creditCardId,Status,notes)values" +
+                    " ('" + this.person.CustomId + "','" + a + "',"+this.totalPrice+",'" + carDetails.CarName + "',"+this.CarId+",'" + carDetails.CarLevel + "','" + this.Company + "','" + carDetails.Seats + "','" + carDetails.GearBox + "','" + carDetails.EngineCapacity + "','" + carDetails.Doors + "','" + carDetails.Baegs + "','" + this.PickupBranch + "','"+pickBr+"','" + this.PickupDate + "','" + this.ReturnBranch + "','"+RetBr+"','" + this.ReturnDate + "','"+this.CreditCard.id+"','2','"+this.notes+"')";
                 int SuccessFlag = db.ExecuteNonQuery(sql);
                 if (SuccessFlag > 0)
                 {

@@ -89,6 +89,7 @@
   <ItemGroup>
     <Content Include="admin.aspx" />
     <Content Include="ContactUs.aspx" />
+    <Content Include="css\admin.css" />
     <Content Include="css\animate\animate.css" />
     <Content Include="css\animate\animate.min.css" />
     <Content Include="css\animate\source\attention_seekers\bounce.css" />
@@ -283,6 +284,7 @@
     <Content Include="css\prettyphoto\images\thumbnails\t_3.jpg" />
     <Content Include="css\prettyphoto\images\thumbnails\t_4.jpg" />
     <Content Include="css\prettyphoto\images\thumbnails\t_5.jpg" />
+    <Content Include="css\PrivateArea.css" />
     <Content Include="css\stylesheet.css" />
     <Content Include="css\StyleSheet1.css" />
     <Content Include="css\superfish\css\megafish.css" />
@@ -315,7 +317,6 @@
     <Content Include="data\pics\toyota_yaris.png" />
     <Content Include="ForgetPassword.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="index.aspx" />
     <Content Include="js\bootstrap-select\js\bootstrap-select.js" />
     <Content Include="js\bootstrap-select\js\bootstrap-select.min.js" />
     <Content Include="js\bootstrap-select\js\i18n\defaults-cs_CZ.js" />
@@ -459,6 +460,7 @@
     <Content Include="js\jquery\jquery-migrate-1.2.1.js" />
     <Content Include="js\jquery\jquery-migrate-1.2.1.min.js" />
     <Content Include="js\jquery\jquery-ui-1.11.1.min.js" />
+    <Content Include="js\minutesArr.js" />
     <Content Include="js\modernizr.custom.js" />
     <Content Include="js\owl-carousel2\assets\ajax-loader.gif" />
     <Content Include="js\owl-carousel2\assets\owl.video.play.png" />
@@ -547,7 +549,6 @@
     <Content Include="OrderConfirmation.aspx" />
     <Content Include="PrivateArea.aspx" />
     <Content Include="Reg.aspx" />
-    <Content Include="RegUc.ascx" />
     <Content Include="results.aspx" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
@@ -564,6 +565,7 @@
     </Compile>
     <Compile Include="App_Code\BLL\carBLL.cs" />
     <Compile Include="App_Code\BLL\creaditCardBLL.cs" />
+    <Compile Include="App_Code\BLL\editOrderBll.cs" />
     <Compile Include="App_Code\BLL\OrderBLL.cs" />
     <Compile Include="App_Code\CarDetails.cs" />
     <Content Include="App_Code\Controlers\BranchsController.cs" />
@@ -572,9 +574,12 @@
     <Content Include="App_Code\Controlers\adminController.cs" />
     <Content Include="App_Code\Controlers\orderController.cs" />
     <Content Include="App_Code\Controlers\userController.cs" />
+    <Content Include="App_Code\Controlers\creditCardController.cs" />
     <Compile Include="App_Code\DAL\carDAL.cs" />
     <Compile Include="App_Code\DAL\creditCardDAL.cs" />
+    <Compile Include="App_Code\DAL\editOrderDal.cs" />
     <Compile Include="App_Code\DAL\OrderDAL.cs" />
+    <Compile Include="App_Code\editExtOrder.cs" />
     <Compile Include="App_Code\Extention.cs" />
     <Compile Include="App_Code\ExtOrder.cs" />
     <Compile Include="App_Code\GlobFuncs2.cs" />
@@ -618,13 +623,6 @@
     <Compile Include="Reg.aspx.designer.cs">
       <DependentUpon>Reg.aspx</DependentUpon>
     </Compile>
-    <Compile Include="RegUc.ascx.cs">
-      <DependentUpon>RegUc.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="RegUc.ascx.designer.cs">
-      <DependentUpon>RegUc.ascx</DependentUpon>
-    </Compile>
     <Compile Include="results.aspx.cs">
       <DependentUpon>results.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -662,13 +660,6 @@
     </Compile>
     <Compile Include="ForgetPassword.aspx.designer.cs">
       <DependentUpon>ForgetPassword.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="index.aspx.cs">
-      <DependentUpon>index.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="index.aspx.designer.cs">
-      <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="MainMaster.Master.cs">
       <DependentUpon>MainMaster.Master</DependentUpon>
@@ -721,7 +712,6 @@
     <Content Include="js\swiper\js\maps\swiper.min.js.map" />
     <Content Include="MainMaster.Master" />
     <None Include="packages.config" />
-    <Content Include="stream_movies.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

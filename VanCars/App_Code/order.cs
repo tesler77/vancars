@@ -14,6 +14,7 @@ namespace VanCars.App_Code
         public int CustomId { get; set; }
         public string ExternalRentId { get; set; }
         public string CarName { get; set; }
+        public int CarId { get; set; }
         public int CarLevel { get; set; }
         public string CompanyId { get; set; }
         public int Seats { get; set; }
@@ -30,12 +31,13 @@ namespace VanCars.App_Code
         public string DateOrder { get; set; }
         public string Status { get; set; }
 
-        public order(int rentId, int customId, string externalRentId, string carName, int carLevel, string companyId, int seats, string gearBox, int engineCapacity, int doors, int beags, int pickupBranch, string pickupBranchText, string pickupDate, int returnBranch, string returnBranchText, string returnDate, string dateOrder, string status)
+        public order(int rentId, int customId, string externalRentId, string carName,int carId, int carLevel, string companyId, int seats, string gearBox, int engineCapacity, int doors, int beags, int pickupBranch, string pickupBranchText, string pickupDate, int returnBranch, string returnBranchText, string returnDate, string dateOrder, string status)
         {
             RentId = rentId;
             CustomId = customId;
             ExternalRentId = externalRentId;
             CarName = carName;
+            CarId = carId;
             CarLevel = carLevel;
             CompanyId = companyId;
             Seats = seats;
@@ -57,7 +59,7 @@ namespace VanCars.App_Code
         public string getOrder()
         {
             DataBase db = new DataBase();
-            string sql = "select RentId ,CustomId,ExternalRentId,CarName,carLevel.LevelName,companys.CompanyName,Seats,GearBox,EngineCapacity,Doors,Beags,pickupBranchs.Address + ' ' + pickupCity.CityName as PickupBranchText,PickupDate,returnBranchs.Address + ' ' + returnCitys.CityName as ReturnBranchText,ReturnDate,DateOrder,statuses.statusName as Status from OrderTable inner join CarLevelTable as carLevel on OrderTable.CarLevel = carLevel.IdLevel inner join CompanysTable as companys on OrderTable.CompanyId = companys.CompanyId inner join  BranchTable as pickupBranchs on OrderTable.PickupBranch = pickupBranchs.BranchId inner join CityTable as pickupCity on pickupBranchs.CityId = pickupCity.CityId inner join BranchTable as returnBranchs on OrderTable.ReturnBranch = returnBranchs.BranchId inner join CityTable as returnCitys on returnBranchs.CityId = returnCitys.CityId inner join statusesTable as statuses on OrderTable.Status = statuses.statusId where RentId = " + this.RentId;
+            string sql = "select RentId ,CustomId,ExternalRentId,CarName,CarId,carLevel.LevelName,companys.CompanyName,Seats,GearBox,EngineCapacity,Doors,Beags,pickupBranchs.Address + ' ' + pickupCity.CityName as PickupBranchText,PickupDate,returnBranchs.Address + ' ' + returnCitys.CityName as ReturnBranchText,ReturnDate,DateOrder,statuses.statusName as Status from OrderTable inner join CarLevelTable as carLevel on OrderTable.CarLevel = carLevel.IdLevel inner join CompanysTable as companys on OrderTable.CompanyId = companys.CompanyId inner join  BranchTable as pickupBranchs on OrderTable.PickupBranch = pickupBranchs.BranchId inner join CityTable as pickupCity on pickupBranchs.CityId = pickupCity.CityId inner join BranchTable as returnBranchs on OrderTable.ReturnBranch = returnBranchs.BranchId inner join CityTable as returnCitys on returnBranchs.CityId = returnCitys.CityId inner join statusesTable as statuses on OrderTable.Status = statuses.statusId where RentId = " + this.RentId;
             DataTable dt = db.ExecuteReader(sql);
             if(dt.Rows.Count > 0)
             {

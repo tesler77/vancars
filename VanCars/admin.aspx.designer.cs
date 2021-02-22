@@ -256,12 +256,30 @@ namespace VanCars {
         protected global::System.Web.UI.WebControls.Button btnSaveCarLevel;
         
         /// <summary>
-        /// ltlScript control.
+        /// ltlAllOrders control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltlScript;
+        protected global::System.Web.UI.WebControls.Literal ltlAllOrders;
+        
+        /// <summary>
+        /// ltlAllCustomers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltlAllCustomers;
+        
+        /// <summary>
+        /// ltlChatsUnread control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltlChatsUnread;
     }
 }

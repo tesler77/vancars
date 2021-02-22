@@ -84,7 +84,7 @@ namespace DAL
             {
                 sql = "select Email from CustomersTable where Email = '" + this.Email + "'";
                 string ret = db.ExecuteScalar(sql);
-                if (ret != null)
+                if (ret != null && ret != "a")
                 {
                     sql = "select numberIncorrects from CustomersTable where Email = '" + this.Email + "'";
                     ret = db.ExecuteScalar(sql);
@@ -132,7 +132,7 @@ namespace DAL
         {
             DataBase db = new DataBase();
             DataTable dt = new DataTable();
-            string sql = "select CustomId,FullName,Address,City,id,BirthDay,LicenseNumber,LicenseLevel,Email,Phone from CustomersTable where CustomId = " + this.UserId;
+            string sql = "select CustomId,FullName,Address,City,id,BirthDay,LicenseNumber,LicenseLevel,LicenseProductionDate,Email,Phone from CustomersTable where CustomId = " + this.UserId;
             dt = db.ExecuteReader(sql);
             this.Name = dt.Rows[0]["FullName"].ToString();
             this.Address = dt.Rows[0]["Address"].ToString();
@@ -141,6 +141,7 @@ namespace DAL
             this.BirthDay = dt.Rows[0]["BirthDay"].ToString();
             this.LicenseNumber = dt.Rows[0]["LicenseNumber"].ToString();
             this.LicenseLevel = (int)dt.Rows[0]["LicenseLevel"];
+            this.DateOfIssuanceLicense = dt.Rows[0]["LicenseProductionDate"].ToString();
             this.Email = dt.Rows[0]["Email"].ToString();
             this.Phone = dt.Rows[0]["Phone"].ToString();
 
@@ -163,7 +164,7 @@ namespace DAL
         public string getUserData(int id)
         {
             DataBase db = new DataBase();
-            string sql = "select CustomId,FullName,Address,citys.CityName,id,BirthDay,licenceLevels.LicenseName,LicenseProductionDate,Email,Phone,numberIncorrects,RegDate from CustomersTable inner join CityTable as citys on CustomersTable.City = citys.CityId inner join LicenseLevelTable as licenceLevels on CustomersTable.LicenseLevel = licenceLevels.LicenseId where CustomId = " + id;
+            string sql = "select CustomId,FullName,Address,citys.CityName,id,BirthDay,licenceLevels.LicenseName,LicenseNumber,LicenseProductionDate,Email,Phone,numberIncorrects,RegDate from CustomersTable inner join CityTable as citys on CustomersTable.City = citys.CityId inner join LicenseLevelTable as licenceLevels on CustomersTable.LicenseLevel = licenceLevels.LicenseId where CustomId = " + id;
             DataTable dt = db.ExecuteReader(sql);
             if (dt.Rows.Count > 0)
             {

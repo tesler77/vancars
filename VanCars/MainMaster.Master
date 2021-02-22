@@ -25,7 +25,13 @@
 
     <script src="js/modernizr.custom.js"></script>
     <script src="js/jquery/jquery-1.11.1.min.js"></script>
-
+    <style>
+        .hideBtn {
+            opacity: 0;
+            height: 0px;
+            width: 0px;
+        }
+    </style>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
         <title>van Car Rentals</title>
@@ -56,7 +62,7 @@
 
                     <!-- Logo -->
                     <div class="logo">
-                        <a href="index.html">
+                        <a href="search.aspx">
                             <img src="\data\pics\aaa.png" alt="Rent It" /></a>
                     </div>
                     <!-- /Logo -->
@@ -72,22 +78,21 @@
                                 <!-- navigation menu -->
                                 <a href="#" class="menu-toggle-close btn"><i class="fa fa-times"></i></a>
                                 <ul class="nav sf-menu">
-
-
-                                    <li class="active"><a href="index.html">דף הבית</a>
-                                    </li>
-                                    <li><a href="car-listing.html">מבצעים חמים</a></li>
+                                    <li><a href="reg.aspx">התחברות והרשמה</a></li>
                                     <li><a href="search.aspx">רכבים</a></li>
-                                    <li><a href="admin.aspx">שאלות</a></li>
-                                    <li><a href="blog.html">בלוג</a>
+                                    <li><a href="ContactUs.aspx">צור קשר</a></li>
+                                    <li><a id="blogLink" href="#">בלוג</a>
                                         <ul>
-                                            <li><a href="blog.html">Blog Sidebar Left </a></li>
-                                            <li><a href="blog-right.html">Blog Sidebar Right</a></li>
-                                            <li><a href="blog-post.html">Blog Single Post</a></li>
+                                            <li><a href="https://twitter.com/vancars2">טוויטר <i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="https://www.facebook.com/van.cars.79">פייסבוק <i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="https://www.instagram.com/van.cars.79/">אינסטגרם <i class="fa fa-instagram"></i></a></li>
                                         </ul>
                                     </li>
-                                    <li id="contact"><a href="ContactUs.aspx">צור קשר</a></li>
-                                    <li><a id="guest" runat="server" href="PrivateArea.aspx">שלום אורח</a></li>
+
+                                    <li><a id="guest" runat="server" href="PrivateArea.aspx">שלום אורח</a>
+                                        <ul id="mainGueast">
+                                        </ul>
+                                    </li>
                                 </ul>
                                 <!-- /navigation menu -->
                             </div>
@@ -106,6 +111,7 @@
 
 
 
+                <asp:Button ID="dis" runat="server" CssClass="hideBtn" OnClick="disconnectClick" />
 
 
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
@@ -120,12 +126,11 @@
 
                         <div class="col-sm-12">
                             <p class="btn-row text-center">
-                                <a href="#" class="btn btn-theme ripple-effect btn-icon-left facebook wow fadeInDown" data-wow-offset="20" data-wow-delay="100ms"><i class="fa fa-facebook"></i>FACEBOOK</a>
-                                <a href="#" class="btn btn-theme btn-icon-left ripple-effect twitter wow fadeInDown" data-wow-offset="20" data-wow-delay="200ms"><i class="fa fa-twitter"></i>TWITTER</a>
-                                <a href="#" class="btn btn-theme btn-icon-left ripple-effect pinterest wow fadeInDown" data-wow-offset="20" data-wow-delay="300ms"><i class="fa fa-pinterest"></i>PINTEREST</a>
-                                <a href="#" class="btn btn-theme btn-icon-left ripple-effect google wow fadeInDown" data-wow-offset="20" data-wow-delay="400ms"><i class="fa fa-google"></i>GOOGLE</a>
+                                <a href="https://www.facebook.com/van.cars.79" class="btn btn-theme ripple-effect btn-icon-left facebook wow fadeInDown" data-wow-offset="20" data-wow-delay="100ms"><i class="fa fa-facebook"></i> FACEBOOK </a>
+                                <a href="https://twitter.com/vancars2" class="btn btn-theme btn-icon-left ripple-effect twitter wow fadeInDown" data-wow-offset="20" data-wow-delay="200ms"><i class="fa fa-twitter"></i> TWITTER </a>
+                                <a href="https://www.instagram.com/van.cars.79/" class="btn btn-theme btn-icon-left ripple-effect instagram wow fadeInDown" data-wow-offset="20" data-wow-delay="300ms"><i class="fa fa-instagram"></i> INSTEGRM </a>
                             </p>
-                            <div class="copyright">&copy; 2015 Rent It — An One Page Rental Car Theme made with passion by jThemes Studio</div>
+<%--                            <div class="copyright">&copy; 2015 Rent It — An One Page Rental Car Theme made with passion by jThemes Studio</div>--%>
                         </div>
 
                     </div>
@@ -161,12 +166,24 @@
     <!-- JS Page Level -->
     <script src="js/theme-ajax-mail.js"></script>
     <script src="js/theme.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZGBCDzrOfP9B583liqId5Mz5KBqmEOQk&callback=initMap" async defer></script>
+    <%--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOSTqosjeMwxqRawLoThqpF0HGv4Pc4AA&callback=initMap" async defer></script>--%>
     <script>
         let guest = document.getElementById('guest');
-        window.onresize = function () { if (window.innerWidth > 991) { guest.style.color = 'black' } else { guest.style.color = '' } }
-        window.onload = function () { if (window.innerWidth > 991) { guest.style.color = 'black' } else { guest.style.color = '' }}
+        let blogLink = document.getElementById("blogLink")
+        window.onresize = function () { if (window.innerWidth > 991) { guest.style.color = 'black'; blogLink.style.color = 'black' } else { guest.style.color = ''; blogLink.style.color = 'white' } }
+        window.onload = function () { if (window.innerWidth > 991) { guest.style.color = 'black'; blogLink.style.color = 'black' } else { guest.style.color = ''; blogLink.style.color = 'white'} }
 
+        function disconect() {
+            $("#dis").click()
+        }
+        var guestBtn = document.getElementById('guest')
+        guestBtn.addEventListener('mouseover', (event) => {
+            if (guestBtn.innerHTML != 'שלום אורח') {
+                $('#mainGueast').html('<button type="button" id="clientDis" onclick="disconect()" class="btn btn-theme btn-block btn-theme-dark">התנתק</button>')
+            } else {
+                $('#mainGueast').html('');
+            }
+        })
     </script>
     <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
     </asp:ContentPlaceHolder>
